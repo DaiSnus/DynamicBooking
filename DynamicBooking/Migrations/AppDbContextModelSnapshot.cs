@@ -17,6 +17,32 @@ namespace DynamicBooking.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
 
+            modelBuilder.Entity("DynamicBooking.Domain.EventActions", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("EditEventId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("RegistrationEventId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("WathcingEventId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId")
+                        .IsUnique();
+
+                    b.ToTable("EventActions");
+                });
+
             modelBuilder.Entity("DynamicBooking.Doomain.Event", b =>
                 {
                     b.Property<Guid>("Id")
@@ -202,6 +228,17 @@ namespace DynamicBooking.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("DynamicBooking.Domain.EventActions", b =>
+                {
+                    b.HasOne("DynamicBooking.Doomain.Event", "Event")
+                        .WithOne("EventActions")
+                        .HasForeignKey("DynamicBooking.Domain.EventActions", "EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+                });
+
             modelBuilder.Entity("DynamicBooking.Doomain.Event", b =>
                 {
                     b.HasOne("DynamicBooking.Doomain.User", "Owner")
@@ -289,6 +326,9 @@ namespace DynamicBooking.Migrations
 
             modelBuilder.Entity("DynamicBooking.Doomain.Event", b =>
                 {
+                    b.Navigation("EventActions")
+                        .IsRequired();
+
                     b.Navigation("EventDates");
 
                     b.Navigation("FormFiles");

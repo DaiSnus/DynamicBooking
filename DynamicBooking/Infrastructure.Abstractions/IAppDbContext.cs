@@ -1,4 +1,5 @@
 ﻿
+using DynamicBooking.Domain;
 using DynamicBooking.Doomain;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,8 @@ public interface IAppDbContext
     DbSet<Event> Events { get; }
 
     DbSet<EventField> EventsFields { get; }
+
+    DbSet<EventActions> EventActions { get; }
 
     DbSet<EventFieldValue> EventFieldValues { get; }
 

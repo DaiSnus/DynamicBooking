@@ -1,6 +1,8 @@
 using DynamicBooking.Infrastructure.Abstractions;
 using DynamicBooking.Infrastructure.DataAccess;
+using DynamicBooking.Infrastructure.Implementations;
 using DynamicBooking.Initializers;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace DynamicBooking
 {
@@ -25,6 +27,7 @@ namespace DynamicBooking
             app.UseSwaggerUI();
 
             app.MapControllers();
+            app.MapDefaultControllerRoute();
             app.MapHealthChecks("healt-check");
 
             app.Run();
@@ -32,14 +35,21 @@ namespace DynamicBooking
 
         public static void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 104857600;
+            });
+
             services.AddHealthChecks();
             services.AddSwaggerGen();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddAutoMapper(typeof(Program).Assembly);
             services.AddMediatR(o => o.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
             services.AddControllersWithViews();
-            
+
+            services.AddScoped<ICurrentUserAccessor, CurrentUserAccessor>();
             services.AddScoped<IAppDbContext, AppDbContext>();
 
             DbContextInitializers.AddAppDbContext(services);

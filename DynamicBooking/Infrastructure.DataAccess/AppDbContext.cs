@@ -1,4 +1,5 @@
-﻿using DynamicBooking.Doomain;
+﻿using DynamicBooking.Domain;
+using DynamicBooking.Doomain;
 using DynamicBooking.Infrastructure.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,8 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<Event> Events { get; private set; }
 
     public DbSet<User> Users { get; private set; }
+
+    public DbSet<EventActions> EventActions { get; private set; }
 
     public DbSet<EventDate> EventsDate { get; private set; }
 
@@ -30,6 +33,11 @@ public class AppDbContext : DbContext, IAppDbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<EventActions>()
+                .HasOne(ea => ea.Event)
+                .WithOne(e => e.EventActions)
+                .HasForeignKey<EventActions>(ea => ea.EventId);
 
         modelBuilder.Entity<EventDate>()
                 .HasOne(ed => ed.Event)

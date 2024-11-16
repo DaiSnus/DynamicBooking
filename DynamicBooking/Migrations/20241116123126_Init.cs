@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DynamicBooking.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,6 +43,27 @@ namespace DynamicBooking.Migrations
                         name: "FK_Events_Users_OwnerId",
                         column: x => x.OwnerId,
                         principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EventActions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    EventId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    RegistrationEventId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    WathcingEventId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    EditEventId = table.Column<Guid>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventActions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EventActions_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -176,6 +197,12 @@ namespace DynamicBooking.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_EventActions_EventId",
+                table: "EventActions",
+                column: "EventId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EventFieldValues_EventFieldId",
                 table: "EventFieldValues",
                 column: "EventFieldId");
@@ -219,6 +246,9 @@ namespace DynamicBooking.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "EventActions");
+
             migrationBuilder.DropTable(
                 name: "EventFieldValues");
 
