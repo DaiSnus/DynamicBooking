@@ -1,5 +1,36 @@
 ﻿@model FormViewModel
 
-<form>
-
+<form asp-action="Edit" asp-controller="Edit" method="post" enctype="multipart/form-data">
+    <h2>Редактирование формы</h2>
+    <div class="owner">
+        <label>Имя: </label><span>@Model.Event.Owner.Name</span>
+        <input type="text" asp-for="Event.Owner.Name" maxlength="20" required />
+        <label>Фамилия: </label><span>@Model.Event.Owner.Surname</span>
+        <input type="text" asp-for="Event.Owner.Surname" maxlength="30" required />
+        <label>Отчество: </label><span>@Model.Event.Owner.Patronymic</span>
+        <input type="text" asp-for="Event.Owner.Patronymic" maxlength="30" required />
+        <label>Номер телефона: </label> <span>@Model.Event.Owner.PhoneNumber</span>
+        <input type="tel" asp-for="Event.Owner.PhoneNumber" maxlength="11" required />
+        <label>Email: </label> <span>@Model.Event.Owner.Email</span>
+        <input type="email" asp-for="Event.Owner.Email" maxlength="50" required>
+    </div>
+    <div class="event">
+        <label>Название мероприятия: </label><span>@Model.Event.Title</span>
+        <input type="text" asp-for="Event.Title" maxlength="100" required />
+        <label>Описание: </label><span>@Model.Event.Description</span>
+        <input type="text" asp-for="Event.Description" maxlength="500" required />
+        <label>Файлы мероприятия</label>
+        <label>Даты проведения</label>
+        <button type="submit" class="btn btn-primary">Добавить дополнительную дату проведения</button>
+        <h5>Время начала мероприятия</h5>
+        <label>Время проведения</label>
+        <button type="submit" class="btn btn-primary">Добавить время проведения</button>
+        <label></label>
+        <label>Опциональные поля</label>
+        <button type="submit" class="btn btn-primary">Добавить для заполнения</button>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Создать форму" />
+    <input type="hidden" name="Event.EventActions" value="@Json.Serialize(Model.Event.EventActions)" />
+    <input type="hidden" name="Event.EventDates" value="@Json.Serialize(Model.Event.EventDates)" />
+    <input type="hidden" name="Event.OptionalFields" value="@Json.Serialize(Model.Event.OptionalFields)" />
 </form>

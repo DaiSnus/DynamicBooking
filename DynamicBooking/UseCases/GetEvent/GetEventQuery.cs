@@ -1,5 +1,6 @@
-﻿using MediatR;
+﻿using DynamicBooking.Doomain;
+using MediatR;
 
 namespace DynamicBooking.UseCases.GetEvent;
 
-public record GetEventQuery() : IRequest<EventDto>;
+public record GetEventQuery(Guid EventId) : IRequest<EventDto>;

@@ -20,14 +20,9 @@ public class CreateController : Controller
     {
         var command = new CreateFormCommand(model.Event);
 
-        var eventUrls = await mediator.Send(command);
+        var eventActions = await mediator.Send(command);
 
-        var viewModel = new CreatedViewModel
-        {
-            EventUrls = eventUrls
-        };
-
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Info", "Info", eventActions);
     }
 
     [HttpGet("create")]

@@ -12,7 +12,7 @@ public class EventActions
 
     public Guid RegistrationEventId { get; set; }
 
-    public Guid WathcingEventId { get; set; }
+    public Guid ResultsId { get; set; }
 
     public Guid EditEventId { get; set; }
 }

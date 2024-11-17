@@ -6,5 +6,5 @@ public class EventDateDto
 {
     public DateTime Date { get; init; }
 
-    public ICollection<TimeSlotDto> TimeSlots { get; init; } = [];
+    public IEnumerable<TimeSlotDto> TimeSlots { get; init; }
 }

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DynamicBooking.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241116123126_Init")]
-    partial class Init
+    [Migration("20241117064732_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,7 @@ namespace DynamicBooking.Migrations
                     b.Property<Guid>("RegistrationEventId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("WathcingEventId")
+                    b.Property<Guid>("ResultsId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

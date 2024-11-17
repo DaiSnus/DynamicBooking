@@ -12,5 +12,5 @@ public class EventField
 
     public string Type { get; set; }
 
-    public IEnumerable<EventFieldValue> EventFieldValues { get; set; }
+    public IEnumerable<EventFieldValue> EventFieldValues { get; set; } = [];
 }

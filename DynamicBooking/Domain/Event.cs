@@ -20,5 +20,5 @@ public class Event
 
     public IEnumerable<EventField>? OptionalFields { get; set; }
 
-    public IEnumerable<Registration> Registrations { get; set; }
+    public IEnumerable<Registration>? Registrations { get; set; }
 }

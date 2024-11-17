@@ -1,6 +1,4 @@
-﻿using DynamicBooking.Doomain;
-
-namespace DynamicBooking.UseCases.GetEvent;
+﻿namespace DynamicBooking.UseCases.GetEvent;
 
 public class EventDto
 {
@@ -12,9 +10,9 @@ public class EventDto
 
     public string Description { get; init; }
 
-    public ICollection<EventFileDto>? FormFiles { get; set; }
+    public IEnumerable<EventFileDto>? FormFiles { get; set; }
 
-    public ICollection<EventDateDto> EventDates { get; init; } = [];
+    public IEnumerable<EventDateDto> EventDates { get; init; } = [];
 
-    public ICollection<EventFieldDto>? OptionalFields { get; init; }
+    public IEnumerable<EventFieldDto>? OptionalFields { get; init; }
 }

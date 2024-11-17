@@ -1,4 +1,6 @@
-﻿using DynamicBooking.ViewModels;
+﻿using DynamicBooking.UseCases.EditForm;
+using DynamicBooking.UseCases.GetEvent;
+using DynamicBooking.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
@@ -14,9 +16,26 @@ public class EditController : Controller
         this.mediator = mediator;
     }
 
-    [HttpGet("edit")]
-    public IActionResult Edit(string url)
+    [HttpGet("edit/{EditEventId}")]
+    public async Task<IActionResult> Edit(Guid EditEventId)
     {
-        return View(new FormViewModel());
+        var e = await mediator.Send(new GetEventQuery(EditEventId));
+
+        var viewModel = new FormViewModel
+        {
+            Event = e
+        };
+
+        return View(viewModel);
     }
+
+    [HttpPost("edit/{EditEventID}")]
+    public async Task<IActionResult> Edit(FormViewModel model)
+    {
+        var eventDto = model.Event;
+
+        var eventActions = await mediator.Send(eventDto);
+
+        return RedirectToAction("Info", "Info", eventActions);
+    } 
 }

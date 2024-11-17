@@ -34,6 +34,10 @@ public class AppDbContext : DbContext, IAppDbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.Entity<Event>()
+                .HasOne(e => e.Owner)
+                .WithMany();
+
         modelBuilder.Entity<EventActions>()
                 .HasOne(ea => ea.Event)
                 .WithOne(e => e.EventActions)

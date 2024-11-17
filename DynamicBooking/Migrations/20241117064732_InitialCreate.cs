@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DynamicBooking.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,7 +54,7 @@ namespace DynamicBooking.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     EventId = table.Column<Guid>(type: "TEXT", nullable: false),
                     RegistrationEventId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    WathcingEventId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ResultsId = table.Column<Guid>(type: "TEXT", nullable: false),
                     EditEventId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>

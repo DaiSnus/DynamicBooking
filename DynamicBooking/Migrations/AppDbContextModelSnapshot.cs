@@ -32,7 +32,7 @@ namespace DynamicBooking.Migrations
                     b.Property<Guid>("RegistrationEventId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("WathcingEventId")
+                    b.Property<Guid>("ResultsId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
