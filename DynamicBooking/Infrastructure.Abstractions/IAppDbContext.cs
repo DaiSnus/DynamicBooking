@@ -11,7 +11,7 @@ public interface IAppDbContext
 
     DbSet<EventField> EventsFields { get; }
 
-    DbSet<EventActions> EventActions { get; }
+    DbSet<EventActionsId> EventActions { get; }
 
     DbSet<EventFieldValue> EventFieldValues { get; }
 

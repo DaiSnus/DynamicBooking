@@ -3,4 +3,4 @@ using MediatR;
 
 namespace DynamicBooking.UseCases.CreateForm;
 
-public record CreateFormCommand(EventDto eventDto) : IRequest<EventActionsDto>;
+public record CreateFormCommand(EventDto eventDto) : IRequest<EventActionsIdDto>;

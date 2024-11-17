@@ -4,7 +4,7 @@ public class EventDto
 {
     public UserDto Owner { get; init; }
 
-    public EventActionsDto EventActions { get; set; }
+    public EventActionsIdDto EventActions { get; set; }
 
     public string Title { get; init; }
 

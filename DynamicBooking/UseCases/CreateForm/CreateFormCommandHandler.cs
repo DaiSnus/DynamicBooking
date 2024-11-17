@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace DynamicBooking.UseCases.CreateForm;
 
-public class CreateFormCommandHandler : IRequestHandler<CreateFormCommand, EventActionsDto>
+public class CreateFormCommandHandler : IRequestHandler<CreateFormCommand, EventActionsIdDto>
 {
     private readonly IAppDbContext appDbContext;
     private readonly IMapper mapper;
@@ -22,11 +22,11 @@ public class CreateFormCommandHandler : IRequestHandler<CreateFormCommand, Event
         this.httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<EventActionsDto> Handle(CreateFormCommand request, CancellationToken cancellationToken)
+    public async Task<EventActionsIdDto> Handle(CreateFormCommand request, CancellationToken cancellationToken)
     {
         var eventDto = request.eventDto;
 
-        eventDto.EventActions = new EventActionsDto
+        eventDto.EventActions = new EventActionsIdDto
         {
             EditEventId = Guid.NewGuid(),
             RegistrationEventId = Guid.NewGuid(),

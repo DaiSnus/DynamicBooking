@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DynamicBooking.UseCases.EditForm;
 
-public class EditFormCommandHandler : IRequestHandler<EditFormCommand, EventActionsDto>
+public class EditFormCommandHandler : IRequestHandler<EditFormCommand, EventActionsIdDto>
 {
     private readonly IAppDbContext appDbContext;
     private readonly IMapper mapper;
@@ -20,7 +20,7 @@ public class EditFormCommandHandler : IRequestHandler<EditFormCommand, EventActi
     }
 
 
-    public async Task<EventActionsDto> Handle(EditFormCommand request, CancellationToken cancellationToken)
+    public async Task<EventActionsIdDto> Handle(EditFormCommand request, CancellationToken cancellationToken)
     {
         var editDto = request.eventDto;
 
@@ -36,13 +36,18 @@ public class EditFormCommandHandler : IRequestHandler<EditFormCommand, EventActi
                         .ThenInclude(of => of.EventFieldValues)
                         .FirstAsync(ea => ea.EventActions.EditEventId == editDto.EventActions.EditEventId);
 
-        e.EventActions = editEvent.EventActions;
-        e.Owner = editEvent.Owner;
+        e.Owner.Name = editEvent.Owner.Name;
+        e.Owner.Surname = editEvent.Owner.Surname;
+        e.Owner.Patronymic = editEvent.Owner.Patronymic;
+        e.Owner.PhoneNumber = editEvent.Owner.PhoneNumber;
+        e.Owner.Email = editEvent.Owner.Email;
         e.Title = editEvent.Title;
         e.Description = editEvent.Description;
         e.FormFiles = editEvent.FormFiles;
         e.EventDates = editEvent.EventDates;
         e.OptionalFields = editEvent.OptionalFields;
+
+        await appDbContext.SaveChangesAsync();
 
         return editDto.EventActions;
     }

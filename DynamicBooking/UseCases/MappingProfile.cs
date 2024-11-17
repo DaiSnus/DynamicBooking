@@ -15,7 +15,7 @@ public class MappingProfile : Profile
         CreateMap<EventFieldDto, EventField>();
         CreateMap<TimeSlotDto, TimeSlot>();
         CreateMap<UserDto, User>();
-        CreateMap<EventActionsDto, EventActions>();
+        CreateMap<EventActionsIdDto, EventActionsId>();
 
         CreateMap<Event, EventDto>();
         CreateMap<EventFile, EventFileDto>();
@@ -23,6 +23,6 @@ public class MappingProfile : Profile
         CreateMap<EventField, EventFieldDto>();
         CreateMap<TimeSlot, TimeSlotDto>();
         CreateMap<User, UserDto>();
-        CreateMap<EventActions, EventActionsDto>();
+        CreateMap<EventActionsId, EventActionsIdDto>();
     }
 }

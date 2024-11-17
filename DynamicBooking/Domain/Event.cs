@@ -6,7 +6,7 @@ public class Event
 {
     public Guid Id { get; set; }
 
-    public EventActions EventActions {  get; set; }
+    public EventActionsId EventActions {  get; set; }
 
     public User Owner { get; set; }
 

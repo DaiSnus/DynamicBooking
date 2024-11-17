@@ -16,7 +16,7 @@ public class InfoController : Controller
     }
 
     [HttpGet("info")]
-    public IActionResult Info(EventActionsDto eventActions)
+    public IActionResult Info(EventActionsIdDto eventActions)
     {
         var viewModel = new InfoViewModel
         {

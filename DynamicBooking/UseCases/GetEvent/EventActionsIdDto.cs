@@ -2,7 +2,7 @@
 
 namespace DynamicBooking.UseCases.GetEvent;
 
-public class EventActionsDto
+public class EventActionsIdDto
 {
     public Guid RegistrationEventId { get; init; }
 

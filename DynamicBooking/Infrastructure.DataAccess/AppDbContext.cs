@@ -11,7 +11,7 @@ public class AppDbContext : DbContext, IAppDbContext
 
     public DbSet<User> Users { get; private set; }
 
-    public DbSet<EventActions> EventActions { get; private set; }
+    public DbSet<EventActionsId> EventActions { get; private set; }
 
     public DbSet<EventDate> EventsDate { get; private set; }
 
@@ -38,10 +38,10 @@ public class AppDbContext : DbContext, IAppDbContext
                 .HasOne(e => e.Owner)
                 .WithMany();
 
-        modelBuilder.Entity<EventActions>()
+        modelBuilder.Entity<EventActionsId>()
                 .HasOne(ea => ea.Event)
                 .WithOne(e => e.EventActions)
-                .HasForeignKey<EventActions>(ea => ea.EventId);
+                .HasForeignKey<EventActionsId>(ea => ea.EventId);
 
         modelBuilder.Entity<EventDate>()
                 .HasOne(ed => ed.Event)

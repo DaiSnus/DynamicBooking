@@ -5,5 +5,5 @@ namespace DynamicBooking.ViewModels;
 
 public class InfoViewModel
 {
-    public EventActionsDto EventActions { get; set; }
+    public EventActionsIdDto EventActions { get; set; }
 }

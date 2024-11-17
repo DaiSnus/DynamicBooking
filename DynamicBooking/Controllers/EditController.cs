@@ -32,9 +32,9 @@ public class EditController : Controller
     [HttpPost("edit/{EditEventID}")]
     public async Task<IActionResult> Edit(FormViewModel model)
     {
-        var eventDto = model.Event;
+        var command = new EditFormCommand(model.Event);
 
-        var eventActions = await mediator.Send(eventDto);
+        var eventActions = await mediator.Send(command);
 
         return RedirectToAction("Info", "Info", eventActions);
     } 

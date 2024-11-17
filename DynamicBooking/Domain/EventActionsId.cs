@@ -2,7 +2,7 @@
 
 namespace DynamicBooking.Domain;
 
-public class EventActions
+public class EventActionsId
 {
     public Guid Id { get; set; }
 
