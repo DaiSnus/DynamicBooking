@@ -25,6 +25,8 @@ public class AppDbContext : DbContext, IAppDbContext
 
     public DbSet<EventFile> EventsFiles { get; private set; }
 
+    public DbSet<TimeRange> TimeRanges { get; private set; }
+
     public AppDbContext(DbContextOptions options) : base(options)
     {
 
@@ -50,8 +52,13 @@ public class AppDbContext : DbContext, IAppDbContext
 
         modelBuilder.Entity<TimeSlot>()
                 .HasOne(ts => ts.EventDate)
-                .WithMany(ed => ed.TimeSlots)
-                .HasForeignKey(ts => ts.EventDateId);
+                .WithOne(ed => ed.TimeSlot)
+                .HasForeignKey<TimeSlot>(ts => ts.EventDateId);
+
+        modelBuilder.Entity<TimeRange>()
+                .HasOne(tr => tr.TimeSlot)
+                .WithOne(ts => ts.TimeRange)
+                .HasForeignKey<TimeRange>(tr => tr.TimeSlotId);
 
         modelBuilder.Entity<EventFile>()
                 .HasOne(eventFile => eventFile.Event)
@@ -69,9 +76,9 @@ public class AppDbContext : DbContext, IAppDbContext
                 .HasForeignKey(eventFieldValue => eventFieldValue.EventFieldId);
 
         modelBuilder.Entity<Registration>()
-                .HasOne(r => r.Event)
-                .WithMany(e => e.Registrations)
-                .HasForeignKey(r => r.EventId);
+                .HasOne(r => r.TimeSlot)
+                .WithMany(ts => ts.Registrations)
+                .HasForeignKey(r => r.TimeSlotId);
 
         modelBuilder.Entity<Registration>()
                 .HasOne(r => r.Participant)

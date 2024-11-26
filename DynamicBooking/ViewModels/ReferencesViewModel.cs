@@ -3,7 +3,7 @@ using DynamicBooking.UseCases.GetEvent;
 
 namespace DynamicBooking.ViewModels;
 
-public class InfoViewModel
+public class ReferencesViewModel
 {
     public EventActionsIdDto EventActions { get; set; }
 }

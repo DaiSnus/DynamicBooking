@@ -4,7 +4,7 @@ namespace DynamicBooking.UseCases.GetEvent;
 
 public class EventDateDto
 {
-    public DateTime Date { get; init; }
+    public DateOnly Date { get; init; }
 
-    public IEnumerable<TimeSlotDto> TimeSlots { get; init; }
+    public TimeSlotDto TimeSlot { get; init; }
 }

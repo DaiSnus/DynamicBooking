@@ -1,0 +1,4 @@
+﻿@model ReferencesViewModel
+
+<a href="@Url.Action("edit","edit", new { EditEventId = Model.EventActions.EditEventId })">Изменить форму регистрации на мероприятие</a>
+<a href="@Url.Action("signup", "signup", new { RegistrationEventId = Model.EventActions.RegistrationEventId})">Регистрация на мероприятие</a>

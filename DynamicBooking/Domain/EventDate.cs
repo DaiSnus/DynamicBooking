@@ -8,7 +8,7 @@ public class EventDate
 
     public Event Event { get; set; }
 
-    public DateTime Date { get; set; }
+    public DateOnly Date { get; set; }
 
-    public IEnumerable<TimeSlot> TimeSlots { get; set; }
+    public TimeSlot TimeSlot { get; set; }
 }

@@ -1,0 +1,53 @@
+﻿@using DynamicBooking.UseCases.GetEvent
+@using DynamicBooking.UseCases.Signup
+@model SignupViewModel
+
+<h2>Регистрация на мероприятие</h2>
+<div class="information-event">
+    <div class="owner">
+        <h3>Организатор мероприятия</h3>
+        <p>Фамилия: <span>@Model.Event.Owner.Surname</span> </p>
+        <p>Имя: <span>@Model.Event.Owner.Name</span></p>
+        <p>Отчество: <span>@Model.Event.Owner.Patronymic</span></p>
+    </div>
+   <div class="event">
+        <p>Название мероприятия
+            <span>@Model.Event.Title</span>
+        </p>
+        <p>Описание
+        <span>@Model.Event.Description</span>
+        </p>
+        <p>Файлы мероприятия</p>
+        <form asp-action="Signup" asp-controller="Signup" method="post" enctype="multipart/form-data">
+            <p>Даты проведения <span>(Выберите одну из возможных)</span></p>
+            @{
+                var EventSignup = new EventSignupDto
+                {
+                    EventActions = new EventActionsIdDto
+                    {
+                        RegistrationEventId=Model.Event.EventActions.RegistrationEventId,
+                        EditEventId=Model.Event.EventActions.EditEventId,
+                        ResultsId=Model.Event.EventActions.ResultsId
+                    }
+                };
+                <select name="selectDate" onchange="onsubmit">
+                    @foreach (var date in Model.Event.EventDates)
+                    {
+                        <p>@date.Date.ToString("dd.MM.yyyy")</p>
+                        <p>Расписания <span>(Выберите одно из возможных)</span></p>
+                       
+                    }
+                </select>
+                <h5>Время начала мероприятия</h5>
+                <p>Время проведения</p>
+                <button type="button">Добавить время проведения</button>
+                <p></p>
+                <p>Опциональные поля</p>
+                <button type="button">Добавить для заполнения</button>
+                <input type="hidden" name="EventSignup.EventDates" value="@EventSignup.EventDates"/>
+                <input type="hidden" name="EventSignup" value="@EventSignup" />
+                <input type="submit" class="btn btn-primary" value="Зарегистрироваться" />
+            }
+        </form>
+    </div>
+</div>

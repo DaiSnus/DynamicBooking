@@ -6,19 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DynamicBooking.Controllers;
 
-public class InfoController : Controller
+public class ReferencesController : Controller
 {
     private readonly IMediator mediator;
 
-    public InfoController(IMediator mediator)
+    public ReferencesController(IMediator mediator)
     {
         this.mediator = mediator;
     }
 
-    [HttpGet("info")]
-    public IActionResult Info(EventActionsIdDto eventActions)
+    [HttpGet("references")]
+    public IActionResult References(EventActionsIdDto eventActions)
     {
-        var viewModel = new InfoViewModel
+        var viewModel = new ReferencesViewModel
         {
             EventActions = eventActions
         };

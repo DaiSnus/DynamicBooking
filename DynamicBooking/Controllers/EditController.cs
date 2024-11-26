@@ -19,7 +19,7 @@ public class EditController : Controller
     [HttpGet("edit/{EditEventId}")]
     public async Task<IActionResult> Edit(Guid EditEventId)
     {
-        var e = await mediator.Send(new GetEventQuery(EditEventId));
+        var e = await mediator.Send(new GetEventDtoQuery(EditEventId));
 
         var viewModel = new FormViewModel
         {
@@ -36,6 +36,6 @@ public class EditController : Controller
 
         var eventActions = await mediator.Send(command);
 
-        return RedirectToAction("Info", "Info", eventActions);
+        return RedirectToAction("References", "References", eventActions);
     } 
 }

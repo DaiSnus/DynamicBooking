@@ -1,4 +1,6 @@
-﻿namespace DynamicBooking.UseCases.GetEvent;
+﻿using DynamicBooking.Doomain;
+
+namespace DynamicBooking.UseCases.GetEvent;
 
 public class EventDto
 {
@@ -12,7 +14,7 @@ public class EventDto
 
     public IEnumerable<EventFileDto>? FormFiles { get; set; }
 
-    public IEnumerable<EventDateDto> EventDates { get; init; } = [];
+    public IEnumerable<EventDateDto> EventDates { get; set; }
 
-    public IEnumerable<EventFieldDto>? OptionalFields { get; init; }
+    public IEnumerable<EventFieldDto>? OptionalFields { get; set; }
 }

@@ -18,11 +18,11 @@ public class CreateController : Controller
     [HttpPost("create")]
     public async Task<IActionResult> Create(FormViewModel model)
     {
-        var command = new CreateFormCommand(model.Event);
+        var command = new CreateFormCommand(model);
 
         var eventActions = await mediator.Send(command);
 
-        return RedirectToAction("Info", "Info", eventActions);
+        return RedirectToAction("References", "References", eventActions);
     }
 
     [HttpGet("create")]

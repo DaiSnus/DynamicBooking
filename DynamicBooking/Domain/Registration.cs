@@ -4,9 +4,9 @@ public class Registration
 {
     public int Id { get; set; }
 
-    public Guid EventId { get; set; }
+    public TimeSlot TimeSlot { get; set; }
 
-    public Event Event { get; set; }
+    public int TimeSlotId {  get; set; }
 
     public Guid ParticipantId { get; set; }
 

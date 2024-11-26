@@ -6,18 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DynamicBooking.UseCases.GetEvent;
 
-public class GetEventQueryHandler : IRequestHandler<GetEventQuery, EventDto>
+public class GetEventDtoQueryHandler : IRequestHandler<GetEventDtoQuery, EventDto>
 {
     private readonly IAppDbContext appDbContext;
     private readonly IMapper mapper;
 
-    public GetEventQueryHandler(IAppDbContext appDbContext, IMapper mapper)
+    public GetEventDtoQueryHandler(IAppDbContext appDbContext, IMapper mapper)
     {
         this.appDbContext = appDbContext;
         this.mapper = mapper;
     }
 
-    public async Task<EventDto> Handle(GetEventQuery request, CancellationToken cancellationToken)
+    public async Task<EventDto> Handle(GetEventDtoQuery request, CancellationToken cancellationToken)
     {
         var eventActionsId = request.EventId;
 
@@ -25,11 +25,16 @@ public class GetEventQueryHandler : IRequestHandler<GetEventQuery, EventDto>
                         .Include(e => e.EventActions)
                         .Include(e => e.Owner)
                         .Include(e => e.EventDates)
-                        .ThenInclude(ed => ed.TimeSlots)
+                        .ThenInclude(ed => ed.TimeSlot)
+                        .ThenInclude(ts => ts.TimeRange)
+                        .Include(e => e.EventDates)
+                        .ThenInclude(ed => ed.TimeSlot)
+                        .ThenInclude(ts => ts.Registrations)
+                        .ThenInclude(r => r.Participant)
                         .Include(e => e.FormFiles)
                         .Include(e => e.OptionalFields)
                         .ThenInclude(of => of.EventFieldValues)
-                        .FirstAsync(ea => ea.EventActions.EditEventId == eventActionsId);
+                        .FirstAsync(e => e.EventActions.EditEventId == eventActionsId);
 
         var eventDto = mapper.Map<EventDto>(e);
 

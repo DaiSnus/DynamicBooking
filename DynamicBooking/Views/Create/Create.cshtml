@@ -1,33 +1,50 @@
-﻿@model FormViewModel
+﻿@using DynamicBooking.UseCases.GetEvent
+@model FormViewModel
 
 <form asp-action="Create" asp-controller="Create" method="post" enctype="multipart/form-data">
     <h2>Создание формы резерврования на мероприятие</h2>
     <div class="owner">
-        <label>Имя</label>
-        <input type="text" asp-for="Event.Owner.Name" maxlength="20" required />
-        <label>Фамилия</label>
-        <input type="text" asp-for="Event.Owner.Surname" maxlength="30" required />
-        <label>Отчество</label>
-        <input type="text" asp-for="Event.Owner.Patronymic" maxlength="30" required />
-        <label>Номер телефона</label>
-        <input type="tel" asp-for="Event.Owner.PhoneNumber" maxlength="11" required />
-        <label>Email</label>
-        <input type="email" asp-for="Event.Owner.Email" maxlength="50" required>
+        <label>Введите информацию о себе</label>
+        <input type="text" asp-for="Event.Owner.Name" maxlength="20" placeholder="Имя создателя" required />
+        <input type="text" asp-for="Event.Owner.Surname" maxlength="30" placeholder="Фамилия" required />
+        <input type="text" asp-for="Event.Owner.Patronymic" placeholder="Отчество" maxlength="30" required />
+        <input type="tel" asp-for="Event.Owner.PhoneNumber" placeholder="Номер телефона" maxlength="11" required />
+        <input type="email" asp-for="Event.Owner.Email" placeholder="Почта" maxlength="50" required>
     </div>
     <div class="event">
-        <label>Название мероприятия</label>
-        <input type="text" asp-for="Event.Title" maxlength="100" required />
-        <label>Описание</label>
-        <input type="text" asp-for="Event.Description" maxlength="500" required />
-        <label>Файлы мероприятия</label>
-        <label>Даты проведения</label>
-        <button type="submit" class="btn btn-primary">Добавить дополнительную дату проведения</button>
-        <h5>Время начала мероприятия</h5>
-        <label>Время проведения</label>
-        <button type="submit" class="btn btn-primary">Добавить время проведения</button>      
-        <label></label>
-        <label>Опциональные поля</label>
-        <button type="submit" class="btn btn-primary">Добавить для заполнения</button>
+        <label>Добавьте информацию о мероприятии</label>
+        <input type="text" asp-for="Event.Title" maxlength="100" placeholder="Название мероприятия" required />
+        <input type="text" asp-for="Event.Description" placeholder="Описание(до 500 символов)" maxlength="500" required />
+        <div id="file-loader">
+            <h3>Добавление файлов мероприятия (до 100 мб)</h3>
+            <div id="file-holder">
+            </div>
+            <button id="add-file-button" type="button">Загрузить файл</button>
+        </div>
+        <div class="date-adder">
+            <h3>Выберите дату и время проведения мероприятия, а также укажите колличество мест для регистрации</h3>
+            <div id="date-holder">
+                <div id="0-date-element">
+                    <input name="EventDates[0][Date]" class="date" type="date" />
+                    <input name="EventDates[0][TimeSlot.TimeRange.StartTime]" class="starttime" type="time" />
+                    <input name="EventDates[0][TimeSlot.TimeRange.EndTime]" class="endtime" type="time" />
+                    <input name="EventDates[0][TimeSlot.AvailableSeats]" class="availableseats" type="number" placeholder="Количество мест" />
+                </div>
+                <button id="add-date-button" type="button">Добавить дополнительную дату проведения</button>
+            </div>
+        </div>
+        <div id="optional-field-adder">
+            <h3>Опциональные поля</h3>
+            <div id="field-holder">
+
+            </div>
+            <button id="add-opt-field-button" type="button">Добавить для заполнения</button>
+        </div>
     </div>
     <input type="submit" class="btn btn-primary" value="Создать форму" />
 </form>
+
+@section scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="~/js/CreateAndEdit.js"></script>
+}

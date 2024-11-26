@@ -24,13 +24,13 @@ public class EditFormCommandHandler : IRequestHandler<EditFormCommand, EventActi
     {
         var editDto = request.eventDto;
 
-        var editEvent = mapper.Map<Event>(request.eventDto);
+        var editEvent = mapper.Map<Event>(editDto);
 
         var e = await appDbContext.Events
                         .Include(e => e.EventActions)
                         .Include(e => e.Owner)
                         .Include(e => e.EventDates)
-                        .ThenInclude(ed => ed.TimeSlots)
+                        .ThenInclude(ed => ed.TimeSlot)
                         .Include(e => e.FormFiles)
                         .Include(e => e.OptionalFields)
                         .ThenInclude(of => of.EventFieldValues)

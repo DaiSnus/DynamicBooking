@@ -15,24 +15,56 @@
         <input type="email" asp-for="Event.Owner.Email" maxlength="50" required>
     </div>
     <div class="event">
-        <label>Название мероприятия: </label><span>@Model.Event.Title</span>
-        <input type="text" asp-for="Event.Title" maxlength="100" required />
-        <label>Описание: </label><span>@Model.Event.Description</span>
-        <input type="text" asp-for="Event.Description" maxlength="500" required />
-        <label>Файлы мероприятия</label>
-        <label>Даты проведения</label>
-        <button type="submit" class="btn btn-primary">Добавить дополнительную дату проведения</button>
-        <h5>Время начала мероприятия</h5>
-        <label>Время проведения</label>
-        <button type="submit" class="btn btn-primary">Добавить время проведения</button>
-        <label></label>
-        <label>Опциональные поля</label>
-        <button type="submit" class="btn btn-primary">Добавить для заполнения</button>
+        <label>Добавьте информацию о мероприятии</label>
+        <input type="text" asp-for="Event.Title" maxlength="100" placeholder="Название мероприятия" required />
+        <input type="text" asp-for="Event.Description" placeholder="Описание(до 500 символов)" maxlength="500" required />
+        <div id="file-loader">
+            <h3>Добавление файлов мероприятия (до 100 мб)</h3>
+            @{
+                <h4>Ранее добавленные файлы</h4>
+                if (Model.Event.FormFiles != null)
+                {
+                    foreach (var file in Model.Event.FormFiles)
+                    {
+                        <a href="@file.FilePath" target="_blank">@file.FileName</a>
+                        <input type="file" value="@file" name="@Model.Event.FormFiles"/>
+                        <input type="hidden" asp-for="@file.Id" value="@Model.Event.FormFiles.FirstOrDefault(f => f.Id == file.Id)"/>
+                    }
+                }
+            }
+            <div id="file-holder">
+            </div>
+            <button id="add-file-button" type="button">Загрузить файл</button>
+        </div>
+        <div class="date-adder">
+            <h3>Выберите дату и время проведения мероприятия, а также укажите колличество мест для регистрации</h3>
+            <div id="date-holder">
+                <div id="0-date-element">
+                    <input name="EventDates[0][Date]" class="date" type="date" />
+                    <input name="EventDates[0][TimeSlot.TimeRange.StartTime]" class="starttime" type="time" />
+                    <input name="EventDates[0][TimeSlot.TimeRange.EndTime]" class="endtime" type="time" />
+                    <input name="EventDates[0][TimeSlot.AvailableSeats]" class="availableseats" type="number" placeholder="Количество мест" />
+                </div>
+            </div>
+            <button id="add-date-button" type="button">Добавить дополнительную дату проведения</button>
+        </div>
+        <div id="optional-field-adder">
+            <h3>Опциональные поля</h3>
+            <div id="field-holder">
+            </div>
+            <button id="add-opt-field-button" type="button">Добавить для заполнения</button>
+        </div>
     </div>
-    <input type="submit" class="btn btn-primary" value="Изменить форму" />
+    <input type="hidden" asp-for="@Model.Event.FormFiles" value="@Model.Event.FormFiles"/>
     <input type="hidden" asp-for="@Model.Event.EventActions.EditEventId" value="@Model.Event.EventActions.EditEventId" />
     <input type="hidden" asp-for="@Model.Event.EventActions.RegistrationEventId" value="@Model.Event.EventActions.RegistrationEventId" />
     <input type="hidden" asp-for="@Model.Event.EventActions.ResultsId" value="@Model.Event.EventActions.ResultsId" />
     <input type="hidden" name="Event.EventDates" value="@Model.Event.EventDates" />
     <input type="hidden" name="Event.OptionalFields" value="@Model.Event.OptionalFields" />
+    <input type="submit" class="btn btn-primary mx-auto" value="Изменить форму"/>
 </form>
+
+@section scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="~/js/CreateAndEdit.js"></script>
+}

@@ -3,6 +3,7 @@ using DynamicBooking.Infrastructure.DataAccess;
 using DynamicBooking.Infrastructure.Implementations;
 using DynamicBooking.Initializers;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace DynamicBooking
 {
@@ -23,6 +24,7 @@ namespace DynamicBooking
 
             app.UseRouting();
 
+            app.UseStaticFiles();
             app.UseSwagger();
             app.UseSwaggerUI();
 
@@ -35,9 +37,16 @@ namespace DynamicBooking
 
         public static void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<FormOptions>(options =>
+            services.Configure<FormOptions>(x =>
             {
-                options.MultipartBodyLengthLimit = 104857600;
+                x.ValueLengthLimit = int.MaxValue;
+                x.MultipartBodyLengthLimit = int.MaxValue;
+                x.MultipartHeadersLengthLimit = int.MaxValue;
+            });
+
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.Limits.MaxRequestBodySize = int.MaxValue;
             });
 
             services.AddHealthChecks();

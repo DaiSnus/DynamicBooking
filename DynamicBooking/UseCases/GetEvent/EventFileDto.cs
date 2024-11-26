@@ -1,8 +1,10 @@
-﻿using DynamicBooking.Doomain;
-
-namespace DynamicBooking.UseCases.GetEvent;
+﻿namespace DynamicBooking.UseCases.GetEvent;
 
 public class EventFileDto
 {
-    public IFormFile File { get; set; }
+    public Guid Id { get; set; }
+
+    public string FileName { get; set; }
+
+    public string FilePath { get; set; }
 }

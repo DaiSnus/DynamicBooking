@@ -1,4 +1,6 @@
-﻿namespace DynamicBooking.Doomain;
+﻿using DynamicBooking.Domain;
+
+namespace DynamicBooking.Doomain;
 
 public class TimeSlot
 {
@@ -8,7 +10,9 @@ public class TimeSlot
 
     public EventDate EventDate { get; set; }
 
-    public TimeOnly Time {  get; set; }
+    public TimeRange TimeRange { get; set; }
 
-    public int AvailableSeats {  get; set; }
+    public IEnumerable<Registration>? Registrations { get; set; }
+
+    public int AvailableSeats { get; set; }
 }
