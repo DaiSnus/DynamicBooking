@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace DynamicBooking.Controllers;
 
+[Route("edit")]
 public class EditController : Controller
 {
     private readonly IMediator mediator;
@@ -16,7 +17,7 @@ public class EditController : Controller
         this.mediator = mediator;
     }
 
-    [HttpGet("edit/{EditEventId}")]
+    [HttpGet("{EditEventId}")]
     public async Task<IActionResult> Edit(Guid EditEventId)
     {
         var e = await mediator.Send(new GetEventDtoQuery(EditEventId));
@@ -29,7 +30,7 @@ public class EditController : Controller
         return View(viewModel);
     }
 
-    [HttpPost("edit/{EditEventID}")]
+    [HttpPost("{EditEventID}")]
     public async Task<IActionResult> Edit(FormViewModel model)
     {
         var command = new EditFormCommand(model.Event);
@@ -37,5 +38,5 @@ public class EditController : Controller
         var eventActions = await mediator.Send(command);
 
         return RedirectToAction("References", "References", eventActions);
-    } 
+    }
 }

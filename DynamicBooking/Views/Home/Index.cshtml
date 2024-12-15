@@ -1,8 +1,10 @@
 ﻿@model IndexViewModel
 
-<div>
-    <h1>Сервис динамического бронирования</h1>
-    <form asp-action="create" asp-controller="Create" method="get">
-        <button type="submit" class="btn btn-primary">Создать форму</button>
-    </form>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="bg-light flex-column p-5">
+        <h1>Сервис динамического бронирования</h1>
+        <form class="row align-items-center" asp-action="create" asp-controller="Create" method="get">
+            <button type="submit" class="btn btn-primary">Создать форму</button>
+        </form>
+    </div>
 </div>

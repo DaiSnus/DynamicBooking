@@ -60,6 +60,7 @@ namespace DynamicBooking
 
             services.AddScoped<ICurrentUserAccessor, CurrentUserAccessor>();
             services.AddScoped<IAppDbContext, AppDbContext>();
+            services.AddScoped<IFileSaver,  FileSaver>();
 
             DbContextInitializers.AddAppDbContext(services);
         }

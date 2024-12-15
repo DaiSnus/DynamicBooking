@@ -4,15 +4,15 @@
     <h2>Редактирование формы</h2>
     <div class="owner">
         <label>Имя: </label><span>@Model.Event.Owner.Name</span>
-        <input type="text" asp-for="Event.Owner.Name" maxlength="20" required />
+        <input type="text" asp-for="Event.Owner.Name" maxlength="20" required/>
         <label>Фамилия: </label><span>@Model.Event.Owner.Surname</span>
-        <input type="text" asp-for="Event.Owner.Surname" maxlength="30" required />
+        <input type="text" asp-for="Event.Owner.Surname" maxlength="30"  />
         <label>Отчество: </label><span>@Model.Event.Owner.Patronymic</span>
-        <input type="text" asp-for="Event.Owner.Patronymic" maxlength="30" required />
+        <input type="text" asp-for="Event.Owner.Patronymic" maxlength="30"  />
         <label>Номер телефона: </label> <span>@Model.Event.Owner.PhoneNumber</span>
-        <input type="tel" asp-for="Event.Owner.PhoneNumber" maxlength="11" required />
+        <input type="tel" asp-for="Event.Owner.PhoneNumber" maxlength="11"  />
         <label>Email: </label> <span>@Model.Event.Owner.Email</span>
-        <input type="email" asp-for="Event.Owner.Email" maxlength="50" required>
+        <input type="email" asp-for="Event.Owner.Email" maxlength="50" >
     </div>
     <div class="event">
         <label>Добавьте информацию о мероприятии</label>
@@ -21,14 +21,21 @@
         <div id="file-loader">
             <h3>Добавление файлов мероприятия (до 100 мб)</h3>
             @{
-                <h4>Ранее добавленные файлы</h4>
+                <h4>Ранее добавленные файлы:</h4>
                 if (Model.Event.FormFiles != null)
                 {
+                    var index = 0;
                     foreach (var file in Model.Event.FormFiles)
                     {
-                        <a href="@file.FilePath" target="_blank">@file.FileName</a>
-                        <input type="file" value="@file" name="@Model.Event.FormFiles"/>
-                        <input type="hidden" asp-for="@file.Id" value="@Model.Event.FormFiles.FirstOrDefault(f => f.Id == file.Id)"/>
+                        <div class="uploaded-file" name="UploadedFile[@index]">
+                            <a href="@file.FilePath" target="_blank">@file.FileName</a>
+                            <input type="hidden" value="@file.FilePath" name="Event.FormFiles[@index][FilePath]" />
+                            <input type="hidden" value="@file.FileName" name="Event.FormFiles[@index][FileName]" />
+                            <input type="hidden" name="Event.FormFiles[@index][Id]" value="@file.Id" />
+
+                            <button type="button" class="delete-file-button" data-index="@index" data-fileId="@file.Id" data-editEventId="@Model.Event.EventActions.EditEventId">Удалить файл</button>
+                        </div>
+                        index++;
                     }
                 }
             }
@@ -36,16 +43,27 @@
             </div>
             <button id="add-file-button" type="button">Загрузить файл</button>
         </div>
+        <div class="date-loader">
+            @{
+                <h4>Ранее выбранные временные интервалы:</h4>
+                if (Model.Event.EventDates != null){
+                    var index = 1;
+                    foreach (var eventDate in Model.Event.EventDates){
+                        <div class="uploaded-eventdate" id="@index-date-element">
+                            <input name="EventDates[@index][Date]" class="date" type="date" value="@eventDate.Date.ToString("yyyy-MM-dd")"/>
+                            <input name="EventDates[@index][TimeSlot.TimeRange.StartTime]" class="starttime" type="time" value="@eventDate.TimeSlot.TimeRange.StartTime"/>
+                            <input name="EventDates[@index][TimeSlot.TimeRange.EndTime]" class="endtime" type="time" value="@eventDate.TimeSlot.TimeRange.EndTime"/>
+                            <input name="EventDates[@index][TimeSlot.AvailableSeats]" class="availableseats" type="number" placeholder="Количество мест" value="@eventDate.TimeSlot.AvailableSeats"/>
+                            <input name="EventDates[@index][Id]" class="id" type="hidden" value="@index" />
+
+                            <button type="button" class="delete-eventdate-button" data-index="@index" data-editEventId="@Model.Event.EventActions.EditEventId">Удалить интервал</button>
+                        </div>
+                        index++;
+                    }
+                }
+            }
+        </div>
         <div class="date-adder">
-            <h3>Выберите дату и время проведения мероприятия, а также укажите колличество мест для регистрации</h3>
-            <div id="date-holder">
-                <div id="0-date-element">
-                    <input name="EventDates[0][Date]" class="date" type="date" />
-                    <input name="EventDates[0][TimeSlot.TimeRange.StartTime]" class="starttime" type="time" />
-                    <input name="EventDates[0][TimeSlot.TimeRange.EndTime]" class="endtime" type="time" />
-                    <input name="EventDates[0][TimeSlot.AvailableSeats]" class="availableseats" type="number" placeholder="Количество мест" />
-                </div>
-            </div>
             <button id="add-date-button" type="button">Добавить дополнительную дату проведения</button>
         </div>
         <div id="optional-field-adder">
@@ -55,16 +73,16 @@
             <button id="add-opt-field-button" type="button">Добавить для заполнения</button>
         </div>
     </div>
-    <input type="hidden" asp-for="@Model.Event.FormFiles" value="@Model.Event.FormFiles"/>
     <input type="hidden" asp-for="@Model.Event.EventActions.EditEventId" value="@Model.Event.EventActions.EditEventId" />
     <input type="hidden" asp-for="@Model.Event.EventActions.RegistrationEventId" value="@Model.Event.EventActions.RegistrationEventId" />
     <input type="hidden" asp-for="@Model.Event.EventActions.ResultsId" value="@Model.Event.EventActions.ResultsId" />
     <input type="hidden" name="Event.EventDates" value="@Model.Event.EventDates" />
     <input type="hidden" name="Event.OptionalFields" value="@Model.Event.OptionalFields" />
-    <input type="submit" class="btn btn-primary mx-auto" value="Изменить форму"/>
+    <button type="submit" class="btn btn-primary mx-auto">Изменить форму</button>
 </form>
 
 @section scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="~/js/CreateAndEdit.js"></script>
+    <script src="~/js/Edit.js"></script>
 }
