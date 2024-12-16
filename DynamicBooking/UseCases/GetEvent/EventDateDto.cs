@@ -4,7 +4,7 @@ namespace DynamicBooking.UseCases.GetEvent;
 
 public class EventDateDto
 {
-    public int Id { get; init; }
+    public Guid Id { get; set; }
 
     public DateOnly Date { get; init; }
 

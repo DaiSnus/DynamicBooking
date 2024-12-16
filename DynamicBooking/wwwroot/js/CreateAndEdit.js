@@ -1,4 +1,4 @@
-﻿let datesIndex = 1;
+﻿let datesIndex = (document.getElementsByClassName('uploaded-eventdate').length == 0) ? document.getElementsByClassName('uploaded-eventdate').length + 1 : document.getElementsByClassName('uploaded-eventdate').length;
 let fileIndex = 0;
 let fieldIndex = 0;
 
@@ -177,7 +177,7 @@ function removeDateClick() {
 }
 
 function addRemovingDateButton() {
-    const dateHolder = document.getElementById('date-holder');
+    const dateHolder = document.getElementsByClassName('date-adder')[0];
     const removeDateButton = document.createElement('button');
 
     removeDateButton.setAttribute('type', 'button');
@@ -207,7 +207,7 @@ function addDateClick() {
     endTimeInput.name = `EventDates[${datesIndex}][TimeSlot.TimeRange.EndTime]`;
     availableSeats.name = `EventDates[${datesIndex}][TimeSlot.AvailableSeats]`;
     id.name = `EventDates[${datesIndex}][Id]`;
-    id.value = datesIndex + 1;
+    id.value = crypto.randomUUID();
 
     // Установить минимальную дату для нового поля
     setMinDate(dateInput);

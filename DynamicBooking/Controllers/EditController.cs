@@ -1,4 +1,6 @@
-﻿using DynamicBooking.UseCases.EditForm;
+﻿using DynamicBooking.UseCases.Delete;
+using DynamicBooking.UseCases.DeleteFile;
+using DynamicBooking.UseCases.EditForm;
 using DynamicBooking.UseCases.GetEvent;
 using DynamicBooking.ViewModels;
 using MediatR;
@@ -33,7 +35,7 @@ public class EditController : Controller
     [HttpPost("{EditEventID}")]
     public async Task<IActionResult> Edit(FormViewModel model)
     {
-        var command = new EditFormCommand(model.Event);
+        var command = new EditFormCommand(model);
 
         var eventActions = await mediator.Send(command);
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DynamicBooking.Controllers;
 
+[Route("eventdate")]
 public class EventDateController : Controller
 {
     private readonly IMediator mediator;
@@ -13,9 +14,11 @@ public class EventDateController : Controller
         this.mediator = mediator;
     }
 
-    [HttpPost("")]
-    public async Task<Unit> DeleteEventDate(DeleteEventDateCommand command)
+    [HttpPost("delete")]
+    public async Task<Unit> Delete(DeleteEventDateCommand command)
     {
+        await mediator.Send(command);
+
         return Unit.Value;
     }
 }

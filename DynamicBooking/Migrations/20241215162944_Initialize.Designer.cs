@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DynamicBooking.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241125160007_Init")]
-    partial class Init
+    [Migration("20241215162944_Initialize")]
+    partial class Initialize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,9 +95,9 @@ namespace DynamicBooking.Migrations
 
             modelBuilder.Entity("DynamicBooking.Doomain.EventDate", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateOnly>("Date")
                         .HasColumnType("TEXT");
@@ -210,12 +210,13 @@ namespace DynamicBooking.Migrations
                     b.Property<int>("AvailableSeats")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("EventDateId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("EventDateId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventDateId");
+                    b.HasIndex("EventDateId")
+                        .IsUnique();
 
                     b.ToTable("TimeSlots");
                 });
@@ -350,8 +351,8 @@ namespace DynamicBooking.Migrations
             modelBuilder.Entity("DynamicBooking.Doomain.TimeSlot", b =>
                 {
                     b.HasOne("DynamicBooking.Doomain.EventDate", "EventDate")
-                        .WithMany("TimeSlots")
-                        .HasForeignKey("EventDateId")
+                        .WithOne("TimeSlot")
+                        .HasForeignKey("DynamicBooking.Doomain.TimeSlot", "EventDateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -372,7 +373,8 @@ namespace DynamicBooking.Migrations
 
             modelBuilder.Entity("DynamicBooking.Doomain.EventDate", b =>
                 {
-                    b.Navigation("TimeSlots");
+                    b.Navigation("TimeSlot")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DynamicBooking.Doomain.EventField", b =>

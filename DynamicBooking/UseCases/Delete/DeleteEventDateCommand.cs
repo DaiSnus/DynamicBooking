@@ -2,4 +2,4 @@
 
 namespace DynamicBooking.UseCases.Delete;
 
-public record DeleteEventDateCommand(int index, Guid editEventId): IRequest<Unit>;
+public record DeleteEventDateCommand(Guid editEventId, Guid eventDateId): IRequest<Unit>;

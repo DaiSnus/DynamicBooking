@@ -6,7 +6,7 @@ public class TimeSlot
 {
     public int Id { get; set; }
 
-    public int EventDateId {  get; set; }
+    public Guid EventDateId {  get; set; }
 
     public EventDate EventDate { get; set; }
 

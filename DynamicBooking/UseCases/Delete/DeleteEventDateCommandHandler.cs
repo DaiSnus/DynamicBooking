@@ -15,11 +15,14 @@ public class DeleteEventDateCommandHandler : IRequestHandler<DeleteEventDateComm
 
     public async Task<Unit> Handle(DeleteEventDateCommand request, CancellationToken cancellationToken)
     {
-        var eventDateId = request.index;
+        var eventDateId = request.eventDateId;
         var editEventId = request.editEventId;
 
         var eventDate = await appDbContext.EventsDate
-                        .FirstAsync(ed => ed.Event.EventActions.EditEventId == editEventId && ed.Id == eventDateId);
+                        .Include(ed => ed.TimeSlot)
+                        .ThenInclude(ts => ts.TimeRange)
+                        .FirstAsync(ed => ed.Event.EventActions.EditEventId == editEventId 
+                                            && ed.Id == eventDateId);
 
         appDbContext.EventsDate.Remove(eventDate);
 

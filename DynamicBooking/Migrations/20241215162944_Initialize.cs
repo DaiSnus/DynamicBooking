@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DynamicBooking.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Initialize : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,8 +72,7 @@ namespace DynamicBooking.Migrations
                 name: "EventsDate",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     EventId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Date = table.Column<DateOnly>(type: "TEXT", nullable: false)
                 },
@@ -135,7 +134,7 @@ namespace DynamicBooking.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    EventDateId = table.Column<int>(type: "INTEGER", nullable: false),
+                    EventDateId = table.Column<Guid>(type: "TEXT", nullable: false),
                     AvailableSeats = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -266,7 +265,8 @@ namespace DynamicBooking.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_TimeSlots_EventDateId",
                 table: "TimeSlots",
-                column: "EventDateId");
+                column: "EventDateId",
+                unique: true);
         }
 
         /// <inheritdoc />

@@ -33,7 +33,7 @@
                             <input type="hidden" value="@file.FileName" name="Event.FormFiles[@index][FileName]" />
                             <input type="hidden" name="Event.FormFiles[@index][Id]" value="@file.Id" />
 
-                            <button type="button" class="delete-file-button" data-index="@index" data-fileId="@file.Id" data-editEventId="@Model.Event.EventActions.EditEventId">Удалить файл</button>
+                            <button type="button" class="delete-file-button" data-index="@index" data-fileId="@file.Id">Удалить файл</button>
                         </div>
                         index++;
                     }
@@ -43,28 +43,31 @@
             </div>
             <button id="add-file-button" type="button">Загрузить файл</button>
         </div>
-        <div class="date-loader">
+        <div class="date-adder">
             @{
                 <h4>Ранее выбранные временные интервалы:</h4>
-                if (Model.Event.EventDates != null){
-                    var index = 1;
-                    foreach (var eventDate in Model.Event.EventDates){
-                        <div class="uploaded-eventdate" id="@index-date-element">
+                <div id="date-holder">
+                @if (Model.Event.EventDates != null){
+                    var index = 0;
+
+                    @foreach (var eventDate in Model.Event.EventDates.OrderBy(ed => ed.Date))
+                    {
+                        <div class="uploaded-eventdate" id="@index-date-element-uploaded">
                             <input name="EventDates[@index][Date]" class="date" type="date" value="@eventDate.Date.ToString("yyyy-MM-dd")"/>
                             <input name="EventDates[@index][TimeSlot.TimeRange.StartTime]" class="starttime" type="time" value="@eventDate.TimeSlot.TimeRange.StartTime"/>
                             <input name="EventDates[@index][TimeSlot.TimeRange.EndTime]" class="endtime" type="time" value="@eventDate.TimeSlot.TimeRange.EndTime"/>
                             <input name="EventDates[@index][TimeSlot.AvailableSeats]" class="availableseats" type="number" placeholder="Количество мест" value="@eventDate.TimeSlot.AvailableSeats"/>
-                            <input name="EventDates[@index][Id]" class="id" type="hidden" value="@index" />
+                            <input name="EventDates[@index][Id]" class="id" type="hidden" value="@eventDate.Id" />
+                            <input class="index" type="hidden" value="@index"/>
 
-                            <button type="button" class="delete-eventdate-button" data-index="@index" data-editEventId="@Model.Event.EventActions.EditEventId">Удалить интервал</button>
+                            <button type="button" class="delete-eventdate-button" data-index="@eventDate.Id" data-editEventId="@Model.Event.EventActions.EditEventId">Удалить интервал</button>
                         </div>
                         index++;
                     }
                 }
+                </div>
+                <button id="add-date-button" type="button">Добавить дополнительную дату проведения</button>
             }
-        </div>
-        <div class="date-adder">
-            <button id="add-date-button" type="button">Добавить дополнительную дату проведения</button>
         </div>
         <div id="optional-field-adder">
             <h3>Опциональные поля</h3>
@@ -76,13 +79,11 @@
     <input type="hidden" asp-for="@Model.Event.EventActions.EditEventId" value="@Model.Event.EventActions.EditEventId" />
     <input type="hidden" asp-for="@Model.Event.EventActions.RegistrationEventId" value="@Model.Event.EventActions.RegistrationEventId" />
     <input type="hidden" asp-for="@Model.Event.EventActions.ResultsId" value="@Model.Event.EventActions.ResultsId" />
-    <input type="hidden" name="Event.EventDates" value="@Model.Event.EventDates" />
     <input type="hidden" name="Event.OptionalFields" value="@Model.Event.OptionalFields" />
     <button type="submit" class="btn btn-primary mx-auto">Изменить форму</button>
 </form>
 
 @section scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="~/js/CreateAndEdit.js"></script>
     <script src="~/js/Edit.js"></script>
 }
