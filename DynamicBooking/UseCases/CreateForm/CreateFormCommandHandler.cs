@@ -37,10 +37,11 @@ public class CreateFormCommandHandler : IRequestHandler<CreateFormCommand, Event
 
         if (viewModel.EventFiles != null && viewModel.EventFiles.Count > 0)
         {
-            eventDto.FormFiles = await fileSaver.SaveFilesAndGetDoomainInstances(viewModel.EventFiles);
+            eventDto.FormFiles = await fileSaver.SaveFilesAndGetDoomainInstancesAsync(viewModel.EventFiles);
         }
+
         eventDto.EventDates = viewModel.EventDates;
-        eventDto.OptionalFields= viewModel.OptionalFields;
+        eventDto.OptionalFields = viewModel.OptionalFields;
 
         var e = mapper.Map<Event>(eventDto);
 

@@ -2,9 +2,9 @@
 
 public class EventFieldValue
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
-    public int EventFieldId { get; set; }
+    public Guid EventFieldId { get; set; }
 
     public EventField EventField { get; set; }
 

@@ -23,12 +23,12 @@ $(document).ready(function () {
     const addFieldButton = document.getElementById('add-opt-field-button');
     
 
-    addDateButton.addEventListener('click', addDateClick);
+    addDateButton.addEventListener('click', addNewDateClick);
     addFileButton.addEventListener('click', addFileClick);
-    addFieldButton.addEventListener('click', addFieldClick);
+    addFieldButton.addEventListener('click', addNewFieldClick);
 })
 
-function removeFieldClick() {
+function removeNewFieldClick() {
     if (fieldIndex > 0) fieldIndex--;
 
     document.getElementById(`${fieldIndex}-field-element`).remove();
@@ -38,7 +38,7 @@ function removeFieldClick() {
     }
 }
 
-function addRemovingFieldButton() {
+function addRemovingNewFieldButton() {
     const fieldAdder = document.getElementById('optional-field-adder');
     const removeFieldButton = document.createElement('button');
 
@@ -48,10 +48,10 @@ function addRemovingFieldButton() {
 
     fieldAdder.appendChild(removeFieldButton);
 
-    removeFieldButton.addEventListener('click', removeFieldClick);
+    removeFieldButton.addEventListener('click', removeNewFieldClick);
 }
 
-function addFieldClick() {
+function addNewFieldClick() {
     const fieldHolder = document.getElementById('field-holder');
 
     const fieldPickerDiv = document.createElement('div');
@@ -67,18 +67,18 @@ function addFieldClick() {
     fieldIndex++;
 
     if (!document.getElementById('remove-opt-field-button')) {
-        addRemovingFieldButton();
+        addRemovingNewFieldButton();
     }
 
     fieldHolder.appendChild(fieldPickerDiv);
 }
 
 function removeFileClick() {
-    if (fileIndex > 0) fileIndex--;
+    if (newFileIndex > 0) newFileIndex--;
 
-    document.getElementById(`${fileIndex}-file`).remove();
+    document.getElementById(`${newFileIndex}-file`).remove();
 
-    if (!document.getElementById(`${fileIndex-1}-file`)) {
+    if (!document.getElementById(`${newFileIndex-1}-file`)) {
         document.getElementById('remove-file-button').remove();
     }
 }
@@ -100,12 +100,12 @@ function addFileClick() {
     const fileHolder = document.getElementById('file-holder');
 
     const fileInput = document.createElement('input');
-    fileInput.setAttribute('id', `${fileIndex}-file`);
+    fileInput.setAttribute('id', `${newFileIndex}-file`);
     fileInput.setAttribute('class', 'loading-file');
     fileInput.setAttribute('type', 'file')
     fileInput.setAttribute('name', `EventFiles`);
 
-    fileIndex++;
+    newFileIndex++;
 
     if (!document.getElementById('remove-file-button')) {
         addRemovingFileButton();
@@ -114,7 +114,7 @@ function addFileClick() {
     fileHolder.appendChild(fileInput);
 }
 
-function removeDateClick() {
+function removeNewDateClick() {
     if (datesIndex > 1) datesIndex--;
 
     document.getElementById(`${datesIndex}-date-element`).remove();
@@ -124,7 +124,7 @@ function removeDateClick() {
     }
 }
 
-function addRemovingDateButton() {
+function addRemovingNewDateButton() {
     const dateHolder = document.getElementById('date-holder');
     const removeDateButton = document.createElement('button');
 
@@ -134,10 +134,10 @@ function addRemovingDateButton() {
 
     dateHolder.appendChild(removeDateButton);
 
-    removeDateButton.addEventListener('click', removeDateClick);
+    removeDateButton.addEventListener('click', removeNewDateClick);
 }
 
-function addDateClick() {
+function addNewDateClick() {
     const dateHolder = document.getElementById('date-holder');
 
     const datePickerDiv = document.createElement('div');
@@ -157,7 +157,7 @@ function addDateClick() {
     datesIndex++;
 
     if (!document.getElementById('remove-date-button')) {
-        addRemovingDateButton();
+        addRemovingNewDateButton();
     }
 
     dateHolder.appendChild(datePickerDiv);

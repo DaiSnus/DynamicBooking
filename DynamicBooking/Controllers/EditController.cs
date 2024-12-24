@@ -24,7 +24,7 @@ public class EditController : Controller
     {
         var e = await mediator.Send(new GetEventDtoQuery(EditEventId));
 
-        var viewModel = new FormViewModel
+        var viewModel = new EditViewModel
         {
             Event = e
         };
@@ -33,7 +33,7 @@ public class EditController : Controller
     }
 
     [HttpPost("{EditEventID}")]
-    public async Task<IActionResult> Edit(FormViewModel model)
+    public async Task<IActionResult> Edit(EditViewModel model)
     {
         var command = new EditFormCommand(model);
 

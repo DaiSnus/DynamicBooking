@@ -13,5 +13,5 @@ public class FormViewModel
 
     public IFormFileCollection EventFiles { get; set; }
 
-    public IEnumerable<EventFieldDto>? OptionalFields { get; init; }
+    public IEnumerable<EventFieldDto> OptionalFields { get; init; }
 }

@@ -13,7 +13,7 @@ public class FileSaver : IFileSaver
         this.webHostEnvironment = webHostEnvironment;
     }
 
-    public async Task<IEnumerable<EventFileDto>> SaveFilesAndGetDoomainInstances(IFormFileCollection files)
+    public async Task<IEnumerable<EventFileDto>> SaveFilesAndGetDoomainInstancesAsync(IFormFileCollection files)
     {
         var eventFiles = new List<EventFileDto>();
 
@@ -24,9 +24,9 @@ public class FileSaver : IFileSaver
                 Directory.CreateDirectory(Path.Combine(webHostEnvironment.WebRootPath, "Files"));
             }
 
-            var path = Path.Combine("Files", uploadedFile.FileName + Guid.NewGuid().ToString());
+            var path = Path.Combine(webHostEnvironment.WebRootPath, "Files", uploadedFile.FileName + Guid.NewGuid().ToString());
 
-            using (var fileStream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, path), FileMode.Create))
+            using (var fileStream = new FileStream(path, FileMode.Create))
             {
                 await uploadedFile.CopyToAsync(fileStream);
             }

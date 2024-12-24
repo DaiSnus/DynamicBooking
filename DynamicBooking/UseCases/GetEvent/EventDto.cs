@@ -16,5 +16,5 @@ public class EventDto
 
     public IEnumerable<EventDateDto> EventDates { get; set; }
 
-    public IEnumerable<EventFieldDto>? OptionalFields { get; set; }
+    public IEnumerable<EventFieldDto> OptionalFields { get; set; }
 }

@@ -2,7 +2,7 @@
 
 public class EventField
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public Guid EventId { get; set; }
 
@@ -12,5 +12,5 @@ public class EventField
 
     public string Type { get; set; }
 
-    public IEnumerable<EventFieldValue> EventFieldValues { get; set; } = [];
+    public IEnumerable<EventFieldValue> EventFieldValues { get; set; }
 }

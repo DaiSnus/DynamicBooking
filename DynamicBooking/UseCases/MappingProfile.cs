@@ -20,6 +20,9 @@ public class MappingProfile : Profile
         CreateMap<RegistrationDto, Registration>();
         CreateMap<EventFieldValueDto, EventFieldValue>();
         CreateMap<TimeRangeDto, TimeRange>();
+        //CreateMap<IEnumerable<EventDateDto>, IEnumerable<EventDate>>();
+        //CreateMap<IEnumerable<EventFileDto>, IEnumerable<EventFile>>();
+        //CreateMap<IEnumerable<EventFieldDto>, IEnumerable<EventField>>();
 
         CreateMap<Event, EventDto>();
         CreateMap<EventFile, EventFileDto>();
@@ -31,5 +34,8 @@ public class MappingProfile : Profile
         CreateMap<Registration, RegistrationDto>();
         CreateMap<EventFieldValue, EventFieldValueDto>();
         CreateMap<TimeRange, TimeRangeDto>();
+        //CreateMap<IEnumerable<EventDate>, IEnumerable<EventDateDto>>();
+        //CreateMap<IEnumerable<EventFile>, IEnumerable<EventFileDto>>();
+        //CreateMap<IEnumerable<EventField>, IEnumerable<EventFieldDto>>();
     }
 }

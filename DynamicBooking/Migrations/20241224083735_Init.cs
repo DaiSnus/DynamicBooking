@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DynamicBooking.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialize : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -91,8 +91,7 @@ namespace DynamicBooking.Migrations
                 name: "EventsFields",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     EventId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Type = table.Column<string>(type: "TEXT", nullable: false)
@@ -132,8 +131,7 @@ namespace DynamicBooking.Migrations
                 name: "TimeSlots",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     EventDateId = table.Column<Guid>(type: "TEXT", nullable: false),
                     AvailableSeats = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -152,9 +150,8 @@ namespace DynamicBooking.Migrations
                 name: "EventFieldValues",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    EventFieldId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    EventFieldId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Value = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -172,9 +169,8 @@ namespace DynamicBooking.Migrations
                 name: "Registrations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    TimeSlotId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TimeSlotId = table.Column<Guid>(type: "TEXT", nullable: false),
                     ParticipantId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -198,9 +194,8 @@ namespace DynamicBooking.Migrations
                 name: "TimeRanges",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    TimeSlotId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TimeSlotId = table.Column<Guid>(type: "TEXT", nullable: false),
                     StartTime = table.Column<TimeOnly>(type: "TEXT", nullable: false),
                     EndTime = table.Column<TimeOnly>(type: "TEXT", nullable: false)
                 },

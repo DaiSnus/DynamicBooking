@@ -58,9 +58,9 @@ namespace DynamicBooking
 
             services.AddControllersWithViews();
 
-            services.AddScoped<ICurrentUserAccessor, CurrentUserAccessor>();
             services.AddScoped<IAppDbContext, AppDbContext>();
             services.AddScoped<IFileSaver,  FileSaver>();
+            services.AddScoped<IFileDeleter, FIleDeleter>();
 
             DbContextInitializers.AddAppDbContext(services);
         }

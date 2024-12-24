@@ -4,5 +4,5 @@ namespace DynamicBooking.Infrastructure.Abstractions;
 
 public interface IFileSaver
 {
-    Task<IEnumerable<EventFileDto>> SaveFilesAndGetDoomainInstances(IFormFileCollection files);
+    Task<IEnumerable<EventFileDto>> SaveFilesAndGetDoomainInstancesAsync(IFormFileCollection files);
 }

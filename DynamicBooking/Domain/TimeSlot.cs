@@ -4,7 +4,7 @@ namespace DynamicBooking.Doomain;
 
 public class TimeSlot
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public Guid EventDateId {  get; set; }
 

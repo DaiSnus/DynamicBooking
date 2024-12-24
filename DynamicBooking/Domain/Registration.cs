@@ -2,11 +2,11 @@
 
 public class Registration
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public TimeSlot TimeSlot { get; set; }
 
-    public int TimeSlotId {  get; set; }
+    public Guid TimeSlotId {  get; set; }
 
     public Guid ParticipantId { get; set; }
 

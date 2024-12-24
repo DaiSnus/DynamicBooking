@@ -4,4 +4,4 @@ using MediatR;
 
 namespace DynamicBooking.UseCases.EditForm;
 
-public record EditFormCommand(FormViewModel viewModel) : IRequest<EventActionsIdDto>;
+public record EditFormCommand(EditViewModel viewModel) : IRequest<EventActionsIdDto>;

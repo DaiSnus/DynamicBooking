@@ -5,9 +5,11 @@ using DynamicBooking.Infrastructure.Abstractions;
 using DynamicBooking.Infrastructure.Implementations;
 using DynamicBooking.UseCases.GetEvent;
 using MediatR;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace DynamicBooking.UseCases.EditForm;
 
@@ -16,24 +18,20 @@ public class EditFormCommandHandler : IRequestHandler<EditFormCommand, EventActi
     private readonly IAppDbContext appDbContext;
     private readonly IMapper mapper;
     private readonly IFileSaver fileSaver;
+    private readonly IFileDeleter fileDeleter;
 
-    public EditFormCommandHandler(IAppDbContext appDbContext, IMapper mapper, IFileSaver fileSaver)
+    public EditFormCommandHandler(IAppDbContext appDbContext, IMapper mapper, IFileSaver fileSaver, IFileDeleter fileDeleter)
     {
         this.appDbContext = appDbContext;
         this.mapper = mapper;
         this.fileSaver = fileSaver;
+        this.fileDeleter = fileDeleter;
     }
-
 
     public async Task<EventActionsIdDto> Handle(EditFormCommand request, CancellationToken cancellationToken)
     {
         var viewModel = request.viewModel;
         var eventDto = viewModel.Event;
-
-        if (viewModel.EventFiles != null && viewModel.EventFiles.Count > 0)
-        {
-            eventDto.FormFiles = await fileSaver.SaveFilesAndGetDoomainInstances(viewModel.EventFiles);
-        }
 
         var e = await appDbContext.Events
                         .Include(e => e.EventActions)
@@ -45,49 +43,120 @@ public class EditFormCommandHandler : IRequestHandler<EditFormCommand, EventActi
                         .ThenInclude(of => of.EventFieldValues)
                         .FirstAsync(ea => ea.EventActions.EditEventId == eventDto.EventActions.EditEventId, cancellationToken);
 
-        eventDto.EventDates = viewModel.EventDates;
-        eventDto.OptionalFields = viewModel.OptionalFields;
-
-        var eventD = mapper.Map<Event>(eventDto);
-
-        var eventDatesDto = eventD.EventDates.Where(ed => ed.EventId == Guid.Empty);
-        var eventDates = e.EventDates;
-        foreach (var item in eventDatesDto)
+        if (viewModel.NewEventFiles != null && viewModel.NewEventFiles.Count > 0)
         {
-            item.Event = e;
-            if (e.EventDates.Where(ed => ed.Id == item.Id).Count() == 0)
+            var newEventFileDtos = await fileSaver.SaveFilesAndGetDoomainInstancesAsync(viewModel.NewEventFiles);
+            eventDto.FormFiles = newEventFileDtos;
+
+            var mappingEventFiles = new List<EventFile>();
+            foreach (var eventFileDto in newEventFileDtos)
             {
-                e.EventDates.Append(item);
+                var eventFile = mapper.Map<EventFile>(eventFileDto);
+                eventFile.Event = e;
+                mappingEventFiles.Add(eventFile);
+            }
+            await appDbContext.EventsFiles.AddRangeAsync(mappingEventFiles);
+        }
+
+        var uploadedEventFiles = appDbContext.EventsFiles;
+        if (viewModel.DeletedEventFiles != null)
+        {
+            fileDeleter.DeleteFile(viewModel.DeletedEventFiles);
+            var deletedFilesIds = viewModel.DeletedEventFiles.Select(ef => ef.Id);
+            uploadedEventFiles.RemoveRange(uploadedEventFiles.Where(ef => deletedFilesIds.Contains(ef.Id)));
+        }
+
+        if (viewModel.AddedEventFiles != null && eventDto.FormFiles != null)
+        {
+            eventDto.FormFiles = eventDto.FormFiles.Concat(viewModel.AddedEventFiles);
+        }
+        else if (viewModel.AddedEventFiles != null)
+        {
+            eventDto.FormFiles = viewModel.AddedEventFiles;
+        }
+
+        var uploadedEventDates = appDbContext.EventsDate;
+
+        if (viewModel.DeletedEventDates != null)
+        {
+            var deletedEventDatesIds = viewModel.DeletedEventDates.Select(ed => ed.Id);
+            uploadedEventDates.RemoveRange(uploadedEventDates.Where(ed => deletedEventDatesIds.Contains(ed.Id)));
+        }
+
+        var eventDateWithTimeRange = uploadedEventDates.Include(ed => ed.TimeSlot)
+                          .ThenInclude(ts => ts.TimeRange);
+
+        if (viewModel.AddedEventDates != null)
+        {
+            if (eventDto.EventDates == null)
+            {
+                eventDto.EventDates = viewModel.AddedEventDates;
+            }
+            foreach (var addedEventDate in viewModel.AddedEventDates)
+            {
+                var uploadedEventDate = eventDateWithTimeRange.First(ed => ed.Id == addedEventDate.Id);
+                uploadedEventDate.Date = addedEventDate.Date;
+                uploadedEventDate.TimeSlot.TimeRange.StartTime = addedEventDate.TimeSlot.TimeRange.StartTime;
+                uploadedEventDate.TimeSlot.TimeRange.EndTime = addedEventDate.TimeSlot.TimeRange.EndTime;
+                uploadedEventDate.TimeSlot.AvailableSeats = addedEventDate.TimeSlot.AvailableSeats;
             }
         }
-        //foreach (var eventDate in eventDates)
-        //{
-        //    var eventDateDto = eventDatesDto.FirstOrDefault(ed => ed.Id == eventDate.Id);
+        if (viewModel.NewEventDates != null)
+        {
+            eventDto.EventDates = eventDto.EventDates.Concat(viewModel.NewEventDates);
 
-        //    if (eventDateDto != null)
-        //    {
-        //        eventDateDto.TimeSlot.EventDateId = eventDate.TimeSlot.EventDateId;
-        //        eventDateDto.EventId = eventDate.EventId;
-        //        eventDateDto.Event = eventDate.Event;
-        //        eventDateDto.TimeSlot.EventDate = eventDate.TimeSlot.EventDate;
-        //        eventDateDto.TimeSlot.TimeRange.TimeSlot = eventDate.TimeSlot;
-        //    }
-        //}
-        //var eventId = eventDatesDto.First().EventId;
-        //var eventDateId = eventDatesDto.First().TimeSlot.EventDateId;
-        //foreach (var eventDateDto in eventDatesDto.Where(ed => ed.EventId == Guid.Empty))
-        //{
-        //    eventDateDto.Event = eventD;
-        //    eventDateDto.TimeSlot.EventDate = eventDateDto;
-        //    eventDateDto.TimeSlot.TimeRange.TimeSlot = eventDateDto.TimeSlot;
-        //    eventDateDto.EventId = eventId;
-        //    eventDateDto.TimeSlot.EventDateId = eventDateId;
-        //}
+            var mappingEventDates = new List<EventDate>();
+            foreach (var eventDateDto in viewModel.NewEventDates)
+            {
+                var eventDate = mapper.Map<EventDate>(eventDateDto);
+                eventDate.Event = e;
+                mappingEventDates.Add(eventDate);
+            }
+            await appDbContext.EventsDate.AddRangeAsync(mappingEventDates);
+        }
 
-        appDbContext.EventsDate.RemoveRange(eventDates.Where(ed => ed.EventId == e.Id));
+        var uploadedOptionalFields = appDbContext.EventsFields;
 
-        await appDbContext.EventsDate.AddRangeAsync(eventDatesDto);
+        if (viewModel.DeletedOptionalFields != null)
+        {
+            var deletedOptionalFieldsIds = viewModel.DeletedOptionalFields.Select(of => of.Id);
+            uploadedOptionalFields.RemoveRange(uploadedOptionalFields.Where(of => deletedOptionalFieldsIds.Contains(of.Id)));
+        }
 
+        if (viewModel.AddedOptionalFields != null)
+        {
+            if (eventDto.OptionalFields == null || eventDto.OptionalFields.Count() == 0)
+            {
+                eventDto.OptionalFields = viewModel.AddedOptionalFields;
+            }
+            foreach (var addedOptionalField in viewModel.AddedOptionalFields)
+            {
+                var uploadedEventField = uploadedOptionalFields.First(of => of.Id == addedOptionalField.Id);
+                uploadedEventField.Title = addedOptionalField.Title;
+                uploadedEventField.Type = addedOptionalField.Type;
+            }
+        }
+        if (viewModel.NewOptionalFields != null)
+        {
+            if (eventDto.OptionalFields == null)
+            {
+                eventDto.OptionalFields = viewModel.NewOptionalFields;
+            }
+            else
+            {
+                eventDto.OptionalFields = eventDto.OptionalFields.Concat(viewModel.NewOptionalFields);
+            }
+
+            var mappingOptionalFields = new List<EventField>();
+            foreach (var eventFieldDto in viewModel.NewOptionalFields)
+            {
+                var eventField = mapper.Map<EventField>(eventFieldDto);
+                eventField.Event = e;
+                mappingOptionalFields.Add(eventField);
+            }
+            await appDbContext.EventsFields.AddRangeAsync(mappingOptionalFields);
+        }
+        
         e.Owner.Surname = eventDto.Owner.Surname;
         e.Owner.Name = eventDto.Owner.Name;
         e.Owner.Email = eventDto.Owner.Email;

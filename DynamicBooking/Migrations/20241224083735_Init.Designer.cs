@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DynamicBooking.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241215162944_Initialize")]
-    partial class Initialize
+    [Migration("20241224083735_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,9 +48,9 @@ namespace DynamicBooking.Migrations
 
             modelBuilder.Entity("DynamicBooking.Domain.TimeRange", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<TimeOnly>("EndTime")
                         .HasColumnType("TEXT");
@@ -58,8 +58,8 @@ namespace DynamicBooking.Migrations
                     b.Property<TimeOnly>("StartTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("TimeSlotId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("TimeSlotId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -114,9 +114,9 @@ namespace DynamicBooking.Migrations
 
             modelBuilder.Entity("DynamicBooking.Doomain.EventField", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<Guid>("EventId")
                         .HasColumnType("TEXT");
@@ -138,12 +138,12 @@ namespace DynamicBooking.Migrations
 
             modelBuilder.Entity("DynamicBooking.Doomain.EventFieldValue", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("EventFieldId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("EventFieldId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
                         .IsRequired()
@@ -182,15 +182,15 @@ namespace DynamicBooking.Migrations
 
             modelBuilder.Entity("DynamicBooking.Doomain.Registration", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<Guid>("ParticipantId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("TimeSlotId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("TimeSlotId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -203,9 +203,9 @@ namespace DynamicBooking.Migrations
 
             modelBuilder.Entity("DynamicBooking.Doomain.TimeSlot", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("AvailableSeats")
                         .HasColumnType("INTEGER");

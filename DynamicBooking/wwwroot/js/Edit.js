@@ -1,6 +1,14 @@
-﻿let datesIndex = (document.getElementsByClassName('uploaded-eventdate').length == 0) ? document.getElementsByClassName('uploaded-eventdate').length + 1 : document.getElementsByClassName('uploaded-eventdate').length;
-let fileIndex = 0;
-let fieldIndex = 0;
+﻿let addedDatesIndex = (document.getElementsByClassName('uploaded-eventdate').length == 0) ? document.getElementsByClassName('uploaded-eventdate').length + 1 : document.getElementsByClassName('uploaded-eventdate').length;
+let newDatesIndex = 0;
+let removingDatesIndex = 0;
+
+let newFileIndex = 0;
+let addedFileIndex = document.getElementsByClassName('uploaded-file').length;
+let removingFileIndex = 0;
+
+let newFieldIndex = 0;
+let addedFieldIndex = document.getElementsByClassName('uploaded-field').length
+let removingFieldIndex = 0;
 
 const datePickerComponent = `
     <input class="date" type="date" />
@@ -23,9 +31,9 @@ $(document).ready(function () {
     const addFileButton = document.getElementById('add-file-button');
     const addFieldButton = document.getElementById('add-opt-field-button');
 
-    addDateButton.addEventListener('click', addDateClick);
-    addFileButton.addEventListener('click', addFileClick);
-    addFieldButton.addEventListener('click', addFieldClick);
+    addDateButton.addEventListener('click', addNewDateClick);
+    addFileButton.addEventListener('click', addNewFileClick);
+    addFieldButton.addEventListener('click', addNewFieldClick);
 
     // Установить минимальную дату при загрузке страницы для существующих полей
     setMinDateForExistingFields();
@@ -63,60 +71,16 @@ $(document).ready(function () {
     const deleteEventDateButtons = document.getElementsByClassName('delete-eventdate-button');
     const uploadedEventDateDivs = document.getElementsByClassName('uploaded-eventdate');
 
-    for (var i = 0; i < deleteFileButtons.length; i++) {
-        const deleteFileButton = deleteFileButtons[i];
-
-        const index = deleteFileButton.getAttribute('data-index');
-        const fileId = deleteFileButton.getAttribute('data-fileId');
-        deleteFileButton.onclick = () => deleteFileClick(index, fileId);
-    }
-
-    for (var i = 0; i < uploadedEventDateDivs.length; i++) {
-        const deleteEventDateButton = deleteEventDateButtons[i];
-        if (i == 0) {
-            deleteEventDateButton.style.display = 'none';
-        }
-        else {
-            const id = deleteEventDateButton.getAttribute('data-index');
-            const editEventId = deleteEventDateButton.getAttribute('data-editEventId');
-            const index = uploadedEventDateDivs[i].getElementsByClassName("index")[0].value;
-            deleteEventDateButton.onclick = () => deleteEventDateClick(id, editEventId, index);
-        }
-    }
+    addRemovingAddedFileButton();
+    addRemovingAddedDateButton();
+    addRemovingAddedFieldButton();
 })  
 
-function deleteEventDateClick(eventDateId, editEventId, index) {
-    $.ajax({
-        url: '/eventdate/delete',
-        method: 'post',
-        dataType: 'json',
-        data: { editEventId: editEventId, eventDateId: eventDateId },
-        success: () => removeEventDate(index),
-    });
-}
-
-function removeEventDate(index) {
-    const uploadedEventDate = document.getElementById(`${index}-date-element-uploaded`);
+function removeEventDate() {
+    const uploadedEventDate = document.getElementById(`${datesIndex - 1}-date-element-uploaded`);
 
     uploadedEventDate.remove();
-
     datesIndex--;
-}
-
-function deleteFileClick(index, fileId) {
-    $.ajax({
-        url: '/file/delete',
-        method: 'post',
-        dataType: 'json',
-        data: { fileId: fileId },
-        success: () => removeFile(index),
-    });
-}
-
-function removeFile(index) {
-    const uploadedFile = document.getElementsByName(`UploadedFile[${index}]`)[0];
-
-    uploadedFile.remove();
 }
 
 // Функция для установки минимальной даты
@@ -139,121 +103,248 @@ function validateDate(input) {
     }
 }
 
-function removeFieldClick() {
-    if (fieldIndex > 0) fieldIndex--;
+function removeAddedFieldClick() {
+    if (addedFieldIndex > 0) addedFieldIndex--;
 
-    document.getElementById(`${fieldIndex}-field-element`).remove();
+    const addedField = document.getElementById(`${addedFieldIndex}-added-field-element`);
+    addedField.setAttribute('class', 'deleted-field');
+    addedField.setAttribute('name', `DeletedOptionalFields[${removingFieldIndex}]`);
+    addedField.setAttribute('id', `${addedFieldIndex}-deleted-field-element`);
 
-    if (!document.getElementById(`${fieldIndex - 1}-field-element`)) {
-        document.getElementById('remove-opt-field-button').remove();
+    const title = addedField.getElementsByClassName('title')[0];
+    const type = addedField.getElementsByClassName('input-type-select')[0];
+    const id = addedField.getElementsByClassName('id')[0];
+
+    title.name = `DeletedOptionalFields[${removingFieldIndex}][Title]`;
+    type.name = `DeletedOptionalFields[${removingFieldIndex}][Type]`;
+    id.name = `DeletedOptionalFields[${removingFieldIndex}][Id]`;
+
+    addedField.style.display = 'none';
+
+    removingFieldIndex++;
+
+    if (!document.getElementById(`${addedFieldIndex - 1}-added-field-element`)) {
+        document.getElementById('remove-added-field-button').remove();
     }
 }
 
-function addRemovingFieldButton() {
+function addRemovingAddedFieldButton() {
+    if (addedFieldIndex > 0) {
+        const fieldAdder = document.getElementById('optional-field-adder');
+        const removeAddedFieldButton = document.createElement('button');
+
+        removeAddedFieldButton.setAttribute('type', 'button');
+        removeAddedFieldButton.setAttribute('id', 'remove-added-field-button');
+        removeAddedFieldButton.innerHTML = 'Удалить ранее добавленный слот';
+        removeAddedFieldButton.style.marginBottom = '20px';
+
+        fieldAdder.appendChild(removeAddedFieldButton);
+
+        removeAddedFieldButton.addEventListener('click', removeAddedFieldClick);
+    }
+}
+
+function removeNewFieldClick() {
+    if (newFieldIndex > 0) newFieldIndex--;
+
+    document.getElementById(`${newFieldIndex}-new-field-element`).remove();
+
+    if (!document.getElementById(`${newFieldIndex - 1}-new-field-element`)) {
+        document.getElementById('remove-opt-new-field-button').remove();
+    }
+}
+
+function addRemovingNewFieldButton() {
     const fieldAdder = document.getElementById('optional-field-adder');
     const removeFieldButton = document.createElement('button');
 
     removeFieldButton.setAttribute('type', 'button');
-    removeFieldButton.setAttribute('id', 'remove-opt-field-button');
-    removeFieldButton.innerHTML = 'Удалить поле';
+    removeFieldButton.setAttribute('id', 'remove-opt-new-field-button');
+    removeFieldButton.innerHTML = 'Удалить добавляемое поле';
 
     fieldAdder.appendChild(removeFieldButton);
 
-    removeFieldButton.addEventListener('click', removeFieldClick);
+    removeFieldButton.addEventListener('click', removeNewFieldClick);
 }
 
-function addFieldClick() {
+function addNewFieldClick() {
     const fieldHolder = document.getElementById('field-holder');
 
     const fieldPickerDiv = document.createElement('div');
     fieldPickerDiv.innerHTML = fieldComponent;
-    fieldPickerDiv.setAttribute('id', `${fieldIndex}-field-element`);
+    fieldPickerDiv.setAttribute('id', `${newFieldIndex}-new-field-element`);
 
     const titleInput = fieldPickerDiv.getElementsByClassName('title')[0];
     const selecterInput = fieldPickerDiv.getElementsByClassName('input-type-select')[0];
 
-    titleInput.name = `OptionalFields[${fieldIndex}][Title]`;
-    selecterInput.name = `OptionalFields[${fieldIndex}][Type]`;
+    titleInput.name = `NewOptionalFields[${newFieldIndex}][Title]`;
+    selecterInput.name = `NewOptionalFields[${newFieldIndex}][Type]`;
 
-    fieldIndex++;
+    newFieldIndex++;
 
-    if (!document.getElementById('remove-opt-field-button')) {
-        addRemovingFieldButton();
+    if (!document.getElementById('remove-opt-new-field-button')) {
+        addRemovingNewFieldButton();
     }
 
     fieldHolder.appendChild(fieldPickerDiv);
 }
 
-function removeFileClick() {
-    if (fileIndex > 0) fileIndex--;
+function removeAddedFileClick() {
+    if (addedFileIndex > 0) addedFileIndex--;
 
-    document.getElementById(`${fileIndex}-file`).remove();
+    const addedFile = document.getElementById(`added-file-${addedFileIndex}`);
+    addedFile.setAttribute('class', 'deleted-file');
+    addedFile.setAttribute('name', `DeletedEventFiles[${removingFileIndex}]`);
+    addedFile.setAttribute('id', `deleted-file-${removingFileIndex}`);
 
-    if (!document.getElementById(`${fileIndex - 1}-file`)) {
+    const filePath = addedFile.getElementsByClassName(`filepath-${addedFileIndex}`)[0];
+    const fileName = addedFile.getElementsByClassName(`filename-${addedFileIndex}`)[0];
+    const fileId = addedFile.getElementsByClassName(`fileid-${addedFileIndex}`)[0];
+
+    filePath.name = `DeletedEventFiles[${removingFileIndex}][FilePath]`;
+    fileName.name = `DeletedEventFiles[${removingFileIndex}][FileName]`;
+    fileId.name = `DeletedEventFiles[${removingFileIndex}][Id]`;
+
+    addedFile.style.display = 'none';
+
+    removingFileIndex++;
+
+    if (!document.getElementById(`added-file-${removingFileIndex - 1}`)) {
+        document.getElementById('remove-added-file-button').remove();
+    }
+}
+
+function addRemovingAddedFileButton() {
+    if (addedFileIndex > 0) {
+        const fileLoader = document.getElementById('file-loader');
+        const removeAddedFileButton = document.createElement('button');
+
+        removeAddedFileButton.setAttribute('type', 'button');
+        removeAddedFileButton.setAttribute('id', 'remove-added-file-button');
+        removeAddedFileButton.innerHTML = 'Удалить ранее загруженный файл';
+        removeAddedFileButton.style.marginBottom = '20px';
+
+        fileLoader.appendChild(removeAddedFileButton);
+
+        removeAddedFileButton.addEventListener('click', removeAddedFileClick);
+    }
+}
+
+function removeNewFileClick() {
+    if (newFileIndex > 0) newFileIndex--;
+
+    document.getElementById(`new-file-${newFileIndex}`).remove();
+
+    if (!document.getElementById(`new-file-${newFileIndex - 1}`)) {
         document.getElementById('remove-file-button').remove();
     }
 }
 
-function addRemovingFileButton() {
-    const fileLoader = document.getElementById('file-loader');
-    const removeFileButton = document.createElement('button');
+function addRemovingNewFileButton() {
+    const fileHolder = document.getElementById('file-holder');
+    const removeNewFileButton = document.createElement('button');
 
-    removeFileButton.setAttribute('type', 'button');
-    removeFileButton.setAttribute('id', 'remove-file-button');
-    removeFileButton.innerHTML = 'Удалить файл';
+    removeNewFileButton.setAttribute('type', 'button');
+    removeNewFileButton.setAttribute('id', 'remove-file-button');
+    removeNewFileButton.innerHTML = 'Удалить загружаемый файл';
 
-    fileLoader.appendChild(removeFileButton);
+    fileHolder.appendChild(removeNewFileButton);
 
-    removeFileButton.addEventListener('click', removeFileClick);
+    removeNewFileButton.addEventListener('click', removeNewFileClick);
 }
 
-function addFileClick() {
+function addNewFileClick() {
     const fileHolder = document.getElementById('file-holder');
 
     const fileInput = document.createElement('input');
-    fileInput.setAttribute('id', `${fileIndex}-file`);
+    fileInput.setAttribute('id', `new-file-${newFileIndex}`);
     fileInput.setAttribute('class', 'loading-file');
     fileInput.setAttribute('type', 'file');
-    fileInput.setAttribute('name', `EventFiles`);
+    fileInput.setAttribute('name', `NewEventFiles`);
 
-    fileIndex++;
+    newFileIndex++;
 
     if (!document.getElementById('remove-file-button')) {
-        addRemovingFileButton();
+        addRemovingNewFileButton();
     }
 
     fileHolder.appendChild(fileInput);
 }
 
-function removeDateClick() {
-    if (datesIndex > 1) datesIndex--;
+function removeAddedDateClick() {
+    if (addedDatesIndex > 0) addedDatesIndex--;
 
-    document.getElementById(`${datesIndex}-date-element`).remove();
+    const addedDate = document.getElementById(`${addedDatesIndex}-added-date-element`);
+    addedDate.setAttribute('class', 'deleted-eventdate');
+    addedDate.setAttribute('name', `DeletedEventDates[${removingDatesIndex}]`);
+    addedDate.setAttribute('id', `${addedDatesIndex}-deleted-date-element`);
 
-    if (!document.getElementById(`${datesIndex - 2}-date-element`)) {
-        document.getElementById('remove-date-button').remove();
+    const date = addedDate.getElementsByClassName('date')[0];
+    const startTime = addedDate.getElementsByClassName('starttime')[0];
+    const endTime = addedDate.getElementsByClassName('endtime')[0];
+    const avialableSeats = addedDate.getElementsByClassName('availableseats')[0];
+    const id = addedDate.getElementsByClassName('id')[0];
+
+    date.name = `DeletedEventDates[${removingDatesIndex}][Date]`;
+    startTime.name = `DeletedEventDates[${removingDatesIndex}][TimeSlot.TimeRange.StartTime]`;
+    endTime.name = `DeletedEventDates[${removingDatesIndex}][TimeSlot.TimeRange.EndTime]`;
+    avialableSeats.name = `DeletedEventDates[${removingDatesIndex}][TimeSlot.AvailableSeats]`;
+    id.name = `DeletedEventDates[${removingDatesIndex}][Id]`;
+
+    addedDate.style.display = 'none';
+
+    removingDatesIndex++;
+
+    if (!document.getElementById(`${addedDatesIndex - 2}-added-date-element`)) {
+        document.getElementById('remove-added-date-button').remove();
     }
 }
 
-function addRemovingDateButton() {
+function addRemovingAddedDateButton() {
+    if (addedDatesIndex > 1) {
+        const dateAdder = document.getElementsByClassName('date-adder')[0];
+        const removeAddedDateButton = document.createElement('button');
+
+        removeAddedDateButton.setAttribute('type', 'button');
+        removeAddedDateButton.setAttribute('id', 'remove-added-date-button');
+        removeAddedDateButton.innerHTML = 'Удалить ранее добавленный слот';
+        removeAddedDateButton.style.marginBottom = '20px';
+
+        dateAdder.appendChild(removeAddedDateButton);
+
+        removeAddedDateButton.addEventListener('click', removeAddedDateClick);
+    }
+}
+
+function removeNewDateClick() {
+    if (newDatesIndex > 0) newDatesIndex--;
+
+    document.getElementById(`${newDatesIndex}-new-date-element`).remove();
+
+    if (!document.getElementById(`${newDatesIndex - 1}-new-date-element`)) {
+        document.getElementById('remove-new-date-button').remove();
+    }
+}
+
+function addRemovingNewDateButton() {
     const dateHolder = document.getElementsByClassName('date-adder')[0];
     const removeDateButton = document.createElement('button');
 
     removeDateButton.setAttribute('type', 'button');
-    removeDateButton.setAttribute('id', 'remove-date-button');
-    removeDateButton.innerHTML = 'Удалить слот';
+    removeDateButton.setAttribute('id', 'remove-new-date-button');
+    removeDateButton.innerHTML = 'Удалить добавляемый слот';
 
     dateHolder.appendChild(removeDateButton);
 
-    removeDateButton.addEventListener('click', removeDateClick);
+    removeDateButton.addEventListener('click', removeNewDateClick);
 }
 
-function addDateClick() {
+function addNewDateClick() {
     const dateHolder = document.getElementById('date-holder');
 
     const datePickerDiv = document.createElement('div');
     datePickerDiv.innerHTML = datePickerComponent;
-    datePickerDiv.setAttribute('id', `${datesIndex}-date-element`);
+    datePickerDiv.setAttribute('id', `${newDatesIndex}-new-date-element`);
 
     const dateInput = datePickerDiv.getElementsByClassName('date')[0];
     const startTimeInput = datePickerDiv.getElementsByClassName('starttime')[0];
@@ -261,20 +352,20 @@ function addDateClick() {
     const availableSeats = datePickerDiv.getElementsByClassName('availableseats')[0];
     const id = datePickerDiv.getElementsByClassName('id')[0];
 
-    dateInput.name = `EventDates[${datesIndex}][Date]`;
-    startTimeInput.name = `EventDates[${datesIndex}][TimeSlot.TimeRange.StartTime]`;
-    endTimeInput.name = `EventDates[${datesIndex}][TimeSlot.TimeRange.EndTime]`;
-    availableSeats.name = `EventDates[${datesIndex}][TimeSlot.AvailableSeats]`;
-    id.name = `EventDates[${datesIndex}][Id]`;
+    dateInput.name = `NewEventDates[${newDatesIndex}][Date]`;
+    startTimeInput.name = `NewEventDates[${newDatesIndex}][TimeSlot.TimeRange.StartTime]`;
+    endTimeInput.name = `NewEventDates[${newDatesIndex}][TimeSlot.TimeRange.EndTime]`;
+    availableSeats.name = `NewEventDates[${newDatesIndex}][TimeSlot.AvailableSeats]`;
+    id.name = `NewEventDates[${newDatesIndex}][Id]`;
     id.value = crypto.randomUUID();
 
     // Установить минимальную дату для нового поля
     setMinDate(dateInput);
 
-    datesIndex++;
+    newDatesIndex++;
 
-    if (!document.getElementById('remove-date-button')) {
-        addRemovingDateButton();
+    if (!document.getElementById('remove-new-date-button')) {
+        addRemovingNewDateButton();
     }
 
     dateHolder.appendChild(datePickerDiv);
