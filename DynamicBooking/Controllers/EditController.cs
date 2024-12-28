@@ -22,7 +22,7 @@ public class EditController : Controller
     [HttpGet("{EditEventId}")]
     public async Task<IActionResult> Edit(Guid EditEventId)
     {
-        var e = await mediator.Send(new GetEventDtoQuery(EditEventId));
+        var e = await mediator.Send(new GetEditEventDtoQuery(EditEventId));
 
         var viewModel = new EditViewModel
         {

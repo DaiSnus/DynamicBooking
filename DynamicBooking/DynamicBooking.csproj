@@ -22,7 +22,8 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="wwwroot\Files\" />
+    <Folder Include="wwwroot\Files\OwnerFiles\" />
+    <Folder Include="wwwroot\Files\ParticipantFiles\" />
   </ItemGroup>
 
 </Project>

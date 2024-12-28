@@ -1,20 +1,24 @@
-﻿using DynamicBooking.Doomain;
+﻿using AutoMapper;
+using DynamicBooking.Doomain;
 using DynamicBooking.Infrastructure.Abstractions;
+using DynamicBooking.UseCases.GetEvent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DynamicBooking.UseCases.Signup.GetEventSignup;
 
-public class GetEventQueryHandler : IRequestHandler<GetEventQuery, Event>
+public class GetSignupEventDtoQueryHandler : IRequestHandler<GetSignupEventDtoQuery, EventDto>
 {
     private readonly IAppDbContext appDbContext;
+    private readonly IMapper mapper;
     
-    public GetEventQueryHandler(IAppDbContext appDbContext)
+    public GetSignupEventDtoQueryHandler(IAppDbContext appDbContext, IMapper mapper)
     {
         this.appDbContext = appDbContext;
+        this.mapper = mapper;
     }
 
-    public async Task<Event> Handle(GetEventQuery request, CancellationToken cancellationToken)
+    public async Task<EventDto> Handle(GetSignupEventDtoQuery request, CancellationToken cancellationToken)
     {
         var registrationEventId = request.registrationEventId;
 
@@ -33,6 +37,8 @@ public class GetEventQueryHandler : IRequestHandler<GetEventQuery, Event>
                        .ThenInclude(of => of.EventFieldValues)
                        .FirstAsync(e => e.EventActions.RegistrationEventId == registrationEventId);
 
-        return e;
+        var eventDto = mapper.Map<EventDto>(e);
+
+        return eventDto;
     }
 }

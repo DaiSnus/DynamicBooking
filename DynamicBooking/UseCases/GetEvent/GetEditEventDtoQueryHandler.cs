@@ -6,20 +6,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DynamicBooking.UseCases.GetEvent;
 
-public class GetEventDtoQueryHandler : IRequestHandler<GetEventDtoQuery, EventDto>
+public class GetEditEventDtoQueryHandler : IRequestHandler<GetEditEventDtoQuery, EventDto>
 {
     private readonly IAppDbContext appDbContext;
     private readonly IMapper mapper;
 
-    public GetEventDtoQueryHandler(IAppDbContext appDbContext, IMapper mapper)
+    public GetEditEventDtoQueryHandler(IAppDbContext appDbContext, IMapper mapper)
     {
         this.appDbContext = appDbContext;
         this.mapper = mapper;
     }
 
-    public async Task<EventDto> Handle(GetEventDtoQuery request, CancellationToken cancellationToken)
+    public async Task<EventDto> Handle(GetEditEventDtoQuery request, CancellationToken cancellationToken)
     {
-        var eventActionsId = request.EventId;
+        var eventActionsId = request.editEventId;
 
         var e = await appDbContext.Events
                         .Include(e => e.EventActions)

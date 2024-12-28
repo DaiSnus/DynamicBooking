@@ -10,44 +10,95 @@
         <p>Имя: <span>@Model.Event.Owner.Name</span></p>
         <p>Отчество: <span>@Model.Event.Owner.Patronymic</span></p>
     </div>
-   <div class="event">
+    <div class="event">
         <p>Название мероприятия
             <span>@Model.Event.Title</span>
         </p>
         <p>Описание
-        <span>@Model.Event.Description</span>
+            <span>@Model.Event.Description</span>
         </p>
         <p>Файлы мероприятия</p>
-        <form asp-action="Signup" asp-controller="Signup" method="post" enctype="multipart/form-data">
-            <p>Даты проведения <span>(Выберите одну из возможных)</span></p>
+        <div id="file-loader">
             @{
-                var EventSignup = new EventSignupDto
+                if (Model.Event.FormFiles != null)
                 {
-                    EventActions = new EventActionsIdDto
+                    var indexOwnerFile = 0;
+                    foreach (var file in Model.Event.FormFiles)
                     {
-                        RegistrationEventId=Model.Event.EventActions.RegistrationEventId,
-                        EditEventId=Model.Event.EventActions.EditEventId,
-                        ResultsId=Model.Event.EventActions.ResultsId
+                        <div class="uploaded-file" id="added-file-@indexOwnerFile">
+                            <a href="@file.FilePath" target="_blank">@file.FileName</a>
+                            <input type="hidden" class="filepath-@indexOwnerFile" value="@file.FilePath" />
+                            <input type="hidden" class="filename-@indexOwnerFile" value="@file.FileName" />
+                        </div>
+                        indexOwnerFile++;
                     }
-                };
-                <select name="selectDate" onchange="onsubmit">
-                    @foreach (var date in Model.Event.EventDates)
-                    {
-                        <p>@date.Date.ToString("dd.MM.yyyy")</p>
-                        <p>Расписания <span>(Выберите одно из возможных)</span></p>
-                       
-                    }
-                </select>
-                <h5>Время начала мероприятия</h5>
-                <p>Время проведения</p>
-                <button type="button">Добавить время проведения</button>
-                <p></p>
-                <p>Опциональные поля</p>
-                <button type="button">Добавить для заполнения</button>
-                <input type="hidden" name="EventSignup.EventDates" value="@EventSignup.EventDates"/>
-                <input type="hidden" name="EventSignup" value="@EventSignup" />
-                <input type="submit" class="btn btn-primary" value="Зарегистрироваться" />
+                }
             }
+        </div>
+        <form asp-action="Signup" asp-controller="Signup" method="post" enctype="multipart/form-data">
+            <div class="participant">
+                <label>Введите информацию о себе</label>
+                <input type="text" asp-for="Participant.Name" maxlength="20" placeholder="Имя" required />
+                <input type="text" asp-for="Participant.Surname" maxlength="30" placeholder="Фамилия" required />
+                <input type="text" asp-for="Participant.Patronymic" placeholder="Отчество" maxlength="30" required />
+                <input type="tel" asp-for="Participant.PhoneNumber" placeholder="Номер телефона" maxlength="11" required />
+                <input type="email" asp-for="Participant.Email" placeholder="Почта" maxlength="50" required>
+            </div>
+
+            <div id="event-dates-loader">
+                <p>Даты проведения <span>(Выберите одну из возможных)</span></p>
+                @{
+                    var indexDate = 0;
+                    @foreach (var date in Model.Event.EventDates.OrderBy(ed => ed.Date))
+                    {
+                        <div class="eventdate-holder" style="display: flex; gap: 15px; margin-bottom: 5px;">
+                            <div class="uploaded-event-date" id="@indexDate-date-element" style="display: flex; gap: 10px; height: 30px;">
+                                <input type="hidden" class="id" value="@date.Id" />
+                                <p class="date">Дата: @date.Date.ToString("dd.MM.yyyy")</p>
+                                <p class="start-time">Начало в @date.TimeSlot.TimeRange.StartTime</p>
+                                <p class="end-time">Конец в @date.TimeSlot.TimeRange.EndTime</p>
+                                <p class="available-seats">Свободных мест: @date.TimeSlot.AvailableSeats</p>
+                                <input type="hidden" class="index" value="@indexDate"/>
+                            </div>
+
+                            <button type="button" class="select-event-date-button">Выбрать интервал</button>
+                        </div>
+
+                        indexDate++;
+                    }
+                }
+            </div>
+            <div class="optional-fields">
+                <h3>Опциональные поля</h3>
+                @{
+                    var indexField = 0;
+                    var indexFile = 0;
+                    @foreach (var field in Model.Event.OptionalFields)
+                    {
+                        <div class="eventfield-holder" style="display: flex; gap: 15px; margin-bottom: 5px;">
+                            <p class="title">@field.Title</p>
+                            @if (field.Type == "file"){
+                                <input type="file" name="ParticipantFiles" class="loading-file" required />
+                                indexFile++;
+                            }
+                            else{
+                                <input class="field-value" type="@field.Type" name="EventFieldsValue[@indexField][Value]" required />
+                            }
+                            <input type="hidden" class="event-field-id" name="EventFieldsValue[@indexField][EventFieldId]" value="@field.Id" />
+                        </div>
+                        indexField++;
+                    }
+                }
+            </div>
+            <input type="hidden" asp-for="@Model.Event.EventActions.EditEventId" value="@Model.Event.EventActions.EditEventId" />
+            <input type="hidden" asp-for="@Model.Event.EventActions.RegistrationEventId" value="@Model.Event.EventActions.RegistrationEventId" />
+            <input type="hidden" asp-for="@Model.Event.EventActions.ResultsId" value="@Model.Event.EventActions.ResultsId" />
+            <input type="submit" class="btn btn-primary" value="Зарегистрироваться" />
         </form>
     </div>
 </div>
+
+@section scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="~/js/Signup.js"></script>
+}

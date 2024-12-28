@@ -7,7 +7,7 @@ let addedFileIndex = document.getElementsByClassName('uploaded-file').length;
 let removingFileIndex = 0;
 
 let newFieldIndex = 0;
-let addedFieldIndex = document.getElementsByClassName('uploaded-field').length
+let addedFieldIndex = document.getElementsByClassName('uploaded-field').length;
 let removingFieldIndex = 0;
 
 const datePickerComponent = `

@@ -13,18 +13,18 @@ public class FileSaver : IFileSaver
         this.webHostEnvironment = webHostEnvironment;
     }
 
-    public async Task<IEnumerable<EventFileDto>> SaveFilesAndGetDoomainInstancesAsync(IFormFileCollection files)
+    public async Task<IEnumerable<EventFileDto>> SaveFilesAndGetDoomainInstancesAsync(IFormFileCollection files, string directory)
     {
         var eventFiles = new List<EventFileDto>();
 
         foreach (var uploadedFile in files)
         {
-            if (!Directory.Exists(Path.Combine(webHostEnvironment.WebRootPath, "Files")))
+            if (!Directory.Exists(Path.Combine(webHostEnvironment.WebRootPath, directory)))
             {
-                Directory.CreateDirectory(Path.Combine(webHostEnvironment.WebRootPath, "Files"));
+                Directory.CreateDirectory(Path.Combine(webHostEnvironment.WebRootPath, directory));
             }
 
-            var path = Path.Combine(webHostEnvironment.WebRootPath, "Files", uploadedFile.FileName + Guid.NewGuid().ToString());
+            var path = Path.Combine(webHostEnvironment.WebRootPath, directory, uploadedFile.FileName + Guid.NewGuid().ToString());
 
             using (var fileStream = new FileStream(path, FileMode.Create))
             {

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DynamicBooking.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241224083735_Init")]
+    [Migration("20241227111144_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -145,6 +145,9 @@ namespace DynamicBooking.Migrations
                     b.Property<Guid>("EventFieldId")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("RegistrationId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Value")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -152,6 +155,8 @@ namespace DynamicBooking.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EventFieldId");
+
+                    b.HasIndex("RegistrationId");
 
                     b.ToTable("EventFieldValues");
                 });
@@ -315,6 +320,10 @@ namespace DynamicBooking.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DynamicBooking.Doomain.Registration", null)
+                        .WithMany("EventFieldValue")
+                        .HasForeignKey("RegistrationId");
+
                     b.Navigation("EventField");
                 });
 
@@ -380,6 +389,11 @@ namespace DynamicBooking.Migrations
             modelBuilder.Entity("DynamicBooking.Doomain.EventField", b =>
                 {
                     b.Navigation("EventFieldValues");
+                });
+
+            modelBuilder.Entity("DynamicBooking.Doomain.Registration", b =>
+                {
+                    b.Navigation("EventFieldValue");
                 });
 
             modelBuilder.Entity("DynamicBooking.Doomain.TimeSlot", b =>

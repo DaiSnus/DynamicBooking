@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DynamicBooking.Controllers;
 
+[Route("signup")]
 public class SignupController : Controller
 {
     private readonly IMediator mediator;
@@ -18,35 +19,24 @@ public class SignupController : Controller
         this.mediator = mediator;
     }
 
-    [HttpGet("signup/{RegistrationEventId}")]
+    [HttpGet("{RegistrationEventId}")]
     public async Task<IActionResult> Signup(Guid RegistrationEventId)
     {
-        var e = await mediator.Send(new GetEventQuery(RegistrationEventId));
+        var e = await mediator.Send(new GetSignupEventDtoQuery(RegistrationEventId));
 
         var viewModel = new SignupViewModel
         {
             Event = e,
-            EventSignup = new EventSignupDto
-            {
-                EventActions = new EventActionsIdDto
-                {
-                    EditEventId = e.EventActions.EditEventId,
-                    RegistrationEventId = RegistrationEventId,
-                    ResultsId = e.EventActions.ResultsId,
-                }
-            }
         };
 
         return View(viewModel);
     }
 
-    [HttpPost("signup/{RegistrationEventId}")]
-    public async Task<IActionResult> Signup(SignupViewModel signupViewModel)
+    [HttpPost("{RegistrationEventId}")]
+    public async Task<Unit> Signup(SignupViewModel signupViewModel)
     {
-        var eventSignUpDto = signupViewModel.EventSignup;
+        var result = await mediator.Send(new SignupCommand(signupViewModel));
 
-        var result = mediator.Send(eventSignUpDto);
-
-        return RedirectToAction("references", "references", eventSignUpDto.EventActions);
+        return Unit.Value;
     }
 }

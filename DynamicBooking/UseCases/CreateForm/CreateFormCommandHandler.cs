@@ -37,7 +37,7 @@ public class CreateFormCommandHandler : IRequestHandler<CreateFormCommand, Event
 
         if (viewModel.EventFiles != null && viewModel.EventFiles.Count > 0)
         {
-            eventDto.FormFiles = await fileSaver.SaveFilesAndGetDoomainInstancesAsync(viewModel.EventFiles);
+            eventDto.FormFiles = await fileSaver.SaveFilesAndGetDoomainInstancesAsync(viewModel.EventFiles, directory:"Files\\OwnerFiles");
         }
 
         eventDto.EventDates = viewModel.EventDates;

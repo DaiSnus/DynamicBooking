@@ -3,4 +3,4 @@ using MediatR;
 
 namespace DynamicBooking.UseCases.GetEvent;
 
-public record GetEventDtoQuery(Guid EventId) : IRequest<EventDto>;
+public record GetEditEventDtoQuery(Guid editEventId) : IRequest<EventDto>;

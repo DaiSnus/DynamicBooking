@@ -76,6 +76,10 @@ public class AppDbContext : DbContext, IAppDbContext
                 .HasForeignKey(eventFieldValue => eventFieldValue.EventFieldId);
 
         modelBuilder.Entity<Registration>()
+                .HasMany(r => r.EventFieldValues)
+                .WithOne();
+
+        modelBuilder.Entity<Registration>()
                 .HasOne(r => r.TimeSlot)
                 .WithMany(ts => ts.Registrations)
                 .HasForeignKey(r => r.TimeSlotId);

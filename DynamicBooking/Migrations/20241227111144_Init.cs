@@ -147,25 +147,6 @@ namespace DynamicBooking.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EventFieldValues",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    EventFieldId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Value = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EventFieldValues", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_EventFieldValues_EventsFields_EventFieldId",
-                        column: x => x.EventFieldId,
-                        principalTable: "EventsFields",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Registrations",
                 columns: table => new
                 {
@@ -210,6 +191,31 @@ namespace DynamicBooking.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "EventFieldValues",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    EventFieldId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Value = table.Column<string>(type: "TEXT", nullable: false),
+                    RegistrationId = table.Column<Guid>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventFieldValues", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EventFieldValues_EventsFields_EventFieldId",
+                        column: x => x.EventFieldId,
+                        principalTable: "EventsFields",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EventFieldValues_Registrations_RegistrationId",
+                        column: x => x.RegistrationId,
+                        principalTable: "Registrations",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_EventActions_EventId",
                 table: "EventActions",
@@ -220,6 +226,11 @@ namespace DynamicBooking.Migrations
                 name: "IX_EventFieldValues_EventFieldId",
                 table: "EventFieldValues",
                 column: "EventFieldId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventFieldValues_RegistrationId",
+                table: "EventFieldValues",
+                column: "RegistrationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_OwnerId",
@@ -277,13 +288,13 @@ namespace DynamicBooking.Migrations
                 name: "EventsFiles");
 
             migrationBuilder.DropTable(
-                name: "Registrations");
-
-            migrationBuilder.DropTable(
                 name: "TimeRanges");
 
             migrationBuilder.DropTable(
                 name: "EventsFields");
+
+            migrationBuilder.DropTable(
+                name: "Registrations");
 
             migrationBuilder.DropTable(
                 name: "TimeSlots");

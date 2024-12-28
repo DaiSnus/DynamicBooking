@@ -45,7 +45,7 @@ public class EditFormCommandHandler : IRequestHandler<EditFormCommand, EventActi
 
         if (viewModel.NewEventFiles != null && viewModel.NewEventFiles.Count > 0)
         {
-            var newEventFileDtos = await fileSaver.SaveFilesAndGetDoomainInstancesAsync(viewModel.NewEventFiles);
+            var newEventFileDtos = await fileSaver.SaveFilesAndGetDoomainInstancesAsync(viewModel.NewEventFiles, directory: "Files\\OwnerFiles");
             eventDto.FormFiles = newEventFileDtos;
 
             var mappingEventFiles = new List<EventFile>();
