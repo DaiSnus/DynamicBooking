@@ -38,6 +38,7 @@ public class EditFormCommandHandler : IRequestHandler<EditFormCommand, EventActi
                         .Include(e => e.Owner)
                         .Include(e => e.EventDates)
                         .ThenInclude(ed => ed.TimeSlot)
+                        .ThenInclude(ts => ts.TimeRange)
                         .Include(e => e.FormFiles)
                         .Include(e => e.OptionalFields)
                         .ThenInclude(of => of.EventFieldValues)

@@ -1,0 +1,36 @@
+﻿@model ResultRegistrationViewModel
+
+<h2>Результат регистрации</h2>
+<span>Внимание, советуем сохранять результаты регистрации</span>
+<div class="registration-result">
+    <table class="registration-table table table-bordered border-primary">
+        <thead class="table-head">
+            <tr>
+                <th>Мероприятие</th>
+                <th>Дата проведения</th>
+                <th>Начало</th>
+                <th>Конец</th>
+                <th>Зарегистрирован</th>
+            </tr>
+        </thead>
+        <tbody class="table-body">
+            @foreach (var registrationSuccessDto in Model.RegistrationSucesses)
+            {
+                <tr>
+                    <td>@registrationSuccessDto.EventTitle</td>
+                    <td>@registrationSuccessDto.Date</td>
+                    <td>@registrationSuccessDto.StartTime</td>
+                    <td>@registrationSuccessDto.EndTime</td>
+                    <td>
+                        @if (@registrationSuccessDto.IsSuccess){
+                            <span>Да</span>
+                        }
+                        else{
+                            <span>Нет</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

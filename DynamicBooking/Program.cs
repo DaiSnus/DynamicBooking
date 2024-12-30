@@ -23,6 +23,7 @@ namespace DynamicBooking
             DbContextInitializers.InitializeDbContext(appDbContext);
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseStaticFiles();
             app.UseSwagger();
@@ -57,6 +58,10 @@ namespace DynamicBooking
             services.AddMediatR(o => o.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
             services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                    .AddSessionStateTempDataProvider();
+
+            services.AddSession();
 
             services.AddScoped<IAppDbContext, AppDbContext>();
             services.AddScoped<IFileSaver,  FileSaver>();

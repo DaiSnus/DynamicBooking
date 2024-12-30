@@ -37,6 +37,9 @@ public class SignupCommandHandler : IRequestHandler<SignupCommand, IEnumerable<R
                         .Include(e => e.EventDates)
                         .ThenInclude(ed => ed.TimeSlot)
                         .ThenInclude(ts => ts.Registrations)
+                        .Include(e => e.EventDates)
+                        .ThenInclude(ed => ed.TimeSlot)
+                        .ThenInclude(ts => ts.TimeRange)
                         .FirstAsync(e => e.EventActions.RegistrationEventId == eventDto.EventActions.RegistrationEventId);
 
         var newEventFieldValue = new List<EventFieldValue>();
@@ -98,7 +101,10 @@ public class SignupCommandHandler : IRequestHandler<SignupCommand, IEnumerable<R
 
                     registrationSuccesses.Add(new RegistrationSuccessDto
                     {
-                        EventDate = eventDate,
+                        EventTitle = e.Title,
+                        Date = eventDate.Date,
+                        StartTime = eventDate.TimeSlot.TimeRange.StartTime,
+                        EndTime = eventDate.TimeSlot.TimeRange.EndTime,
                         IsSuccess = true,
                     });
 
@@ -108,7 +114,10 @@ public class SignupCommandHandler : IRequestHandler<SignupCommand, IEnumerable<R
                 {
                     registrationSuccesses.Add(new RegistrationSuccessDto
                     {
-                        EventDate = eventDate,
+                        EventTitle = e.Title,
+                        Date = eventDate.Date,
+                        StartTime = eventDate.TimeSlot.TimeRange.StartTime,
+                        EndTime = eventDate.TimeSlot.TimeRange.EndTime,
                         IsSuccess = false,
                     });
                 }
