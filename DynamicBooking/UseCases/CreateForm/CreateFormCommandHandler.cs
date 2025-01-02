@@ -32,7 +32,7 @@ public class CreateFormCommandHandler : IRequestHandler<CreateFormCommand, Event
         {
             EditEventId = Guid.NewGuid(),
             RegistrationEventId = Guid.NewGuid(),
-            ResultsId = Guid.NewGuid()
+            ResultsEventId = Guid.NewGuid()
         };
 
         if (viewModel.EventFiles != null && viewModel.EventFiles.Count > 0)

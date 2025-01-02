@@ -1,0 +1,29 @@
+﻿@model RegistrationsViewModel
+
+<div class="register">
+    <h2>Название меропиятия: <span>@Model.EventInfoAndDates.Title</span></h2>
+    <table class="register-table table table-bordered border-primary">
+        <thead>
+            <tr>
+                <th scope="col">Дата проведения</th>
+                <th scope="col">Начало</th>
+                <th scope="col">Окончание</th>
+                <th scope="col">Свободных мест</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var eventDate in Model.EventInfoAndDates.EventDates)
+            {
+                <tr>
+                    <td>@eventDate.Date</td>
+                    <td>@eventDate.TimeSlot.TimeRange.StartTime</td>
+                    <td>@eventDate.TimeSlot.TimeRange.EndTime</td>
+                    <td>@eventDate.TimeSlot.AvailableSeats</td>
+                    <td>
+                        <a href="@Url.Action("participants", "registrations", new { EventDateId = eventDate.Id })">Подробнее</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

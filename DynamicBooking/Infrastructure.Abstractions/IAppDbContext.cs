@@ -25,5 +25,7 @@ public interface IAppDbContext
 
     DbSet<TimeSlot> TimeSlots { get; }
 
+    DbSet<RegistrationEventFieldValue> RegistrationEventFieldValues { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

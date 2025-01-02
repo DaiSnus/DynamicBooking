@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DynamicBooking.Controllers;
 
+[Route("create")]
 public class CreateController : Controller
 {
     private readonly IMediator mediator;
@@ -15,7 +16,7 @@ public class CreateController : Controller
         this.mediator = mediator;
     }
 
-    [HttpPost("create")]
+    [HttpPost()]
     public async Task<IActionResult> Create(FormViewModel model)
     {
         var command = new CreateFormCommand(model);
@@ -25,7 +26,7 @@ public class CreateController : Controller
         return RedirectToAction("References", "References", eventActions);
     }
 
-    [HttpGet("create")]
+    [HttpGet()]
     public IActionResult Create()
     {
         return View(new FormViewModel());

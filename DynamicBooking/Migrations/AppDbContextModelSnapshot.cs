@@ -32,7 +32,7 @@ namespace DynamicBooking.Migrations
                     b.Property<Guid>("RegistrationEventId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("ResultsId")
+                    b.Property<Guid>("ResultsEventId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -41,6 +41,17 @@ namespace DynamicBooking.Migrations
                         .IsUnique();
 
                     b.ToTable("EventActions");
+                });
+
+            modelBuilder.Entity("DynamicBooking.Domain.RegistrationEventFieldValue", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RegistrationEventFieldValues");
                 });
 
             modelBuilder.Entity("DynamicBooking.Domain.TimeRange", b =>
@@ -142,7 +153,7 @@ namespace DynamicBooking.Migrations
                     b.Property<Guid>("EventFieldId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("RegistrationId")
+                    b.Property<Guid>("RegistrationEventFieldValueId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
@@ -153,7 +164,7 @@ namespace DynamicBooking.Migrations
 
                     b.HasIndex("EventFieldId");
 
-                    b.HasIndex("RegistrationId");
+                    b.HasIndex("RegistrationEventFieldValueId");
 
                     b.ToTable("EventFieldValues");
                 });
@@ -191,12 +202,17 @@ namespace DynamicBooking.Migrations
                     b.Property<Guid>("ParticipantId")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("RegistrationEventFieldValueId")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("TimeSlotId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ParticipantId");
+
+                    b.HasIndex("RegistrationEventFieldValueId");
 
                     b.HasIndex("TimeSlotId");
 
@@ -317,11 +333,15 @@ namespace DynamicBooking.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DynamicBooking.Doomain.Registration", null)
+                    b.HasOne("DynamicBooking.Domain.RegistrationEventFieldValue", "RegistrationEventFieldValue")
                         .WithMany("EventFieldValues")
-                        .HasForeignKey("RegistrationId");
+                        .HasForeignKey("RegistrationEventFieldValueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("EventField");
+
+                    b.Navigation("RegistrationEventFieldValue");
                 });
 
             modelBuilder.Entity("DynamicBooking.Doomain.EventFile", b =>
@@ -343,6 +363,12 @@ namespace DynamicBooking.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DynamicBooking.Domain.RegistrationEventFieldValue", "RegistrationEventFieldValue")
+                        .WithMany("Registrations")
+                        .HasForeignKey("RegistrationEventFieldValueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DynamicBooking.Doomain.TimeSlot", "TimeSlot")
                         .WithMany("Registrations")
                         .HasForeignKey("TimeSlotId")
@@ -350,6 +376,8 @@ namespace DynamicBooking.Migrations
                         .IsRequired();
 
                     b.Navigation("Participant");
+
+                    b.Navigation("RegistrationEventFieldValue");
 
                     b.Navigation("TimeSlot");
                 });
@@ -363,6 +391,13 @@ namespace DynamicBooking.Migrations
                         .IsRequired();
 
                     b.Navigation("EventDate");
+                });
+
+            modelBuilder.Entity("DynamicBooking.Domain.RegistrationEventFieldValue", b =>
+                {
+                    b.Navigation("EventFieldValues");
+
+                    b.Navigation("Registrations");
                 });
 
             modelBuilder.Entity("DynamicBooking.Doomain.Event", b =>
@@ -384,11 +419,6 @@ namespace DynamicBooking.Migrations
                 });
 
             modelBuilder.Entity("DynamicBooking.Doomain.EventField", b =>
-                {
-                    b.Navigation("EventFieldValues");
-                });
-
-            modelBuilder.Entity("DynamicBooking.Doomain.Registration", b =>
                 {
                     b.Navigation("EventFieldValues");
                 });

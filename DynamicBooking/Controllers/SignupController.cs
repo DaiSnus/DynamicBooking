@@ -23,9 +23,9 @@ public class SignupController : Controller
     }
 
     [HttpGet("{RegistrationEventId}")]
-    public async Task<IActionResult> Signup(Guid RegistrationEventId)
+    public async Task<IActionResult> Signup(Guid registrationEventId)
     {
-        var e = await mediator.Send(new GetSignupEventDtoQuery(RegistrationEventId));
+        var e = await mediator.Send(new GetSignupEventDtoQuery(registrationEventId));
 
         var viewModel = new SignupViewModel
         {
@@ -42,11 +42,11 @@ public class SignupController : Controller
 
         TempData.AddRegistrationSeccess(registrationResultDtos);
 
-        return RedirectToAction("results");
+        return RedirectToAction("ResultRegistration", routeValues: new { registrationEventId = signupViewModel.Event.EventActions.RegistrationEventId });
     }
 
-    [HttpGet("results")]
-    public IActionResult ResultRegistration()
+    [HttpGet("{RegistrationEventId}/result")]
+    public IActionResult ResultRegistration(Guid registrationEventId)
     {
         var registrationResultDtos = TempData.GetRegistrationSuccessDtos();
 

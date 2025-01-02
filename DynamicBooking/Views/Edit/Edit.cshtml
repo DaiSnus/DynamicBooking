@@ -17,7 +17,7 @@
     <div class="event">
         <label>Добавьте информацию о мероприятии</label>
         <input type="text" asp-for="Event.Title" maxlength="100" placeholder="Название мероприятия" required />
-        <input type="text" asp-for="Event.Description" placeholder="Описание(до 500 символов)" maxlength="500" required />
+        <textarea asp-for="Event.Description" placeholder="Описание(до 500 символов)" maxlength="500" required></textarea>
         <div id="file-loader">
             <h3>Добавление файлов мероприятия (до 100 мб)</h3>
             @{
@@ -94,7 +94,7 @@
     </div>
     <input type="hidden" asp-for="@Model.Event.EventActions.EditEventId" value="@Model.Event.EventActions.EditEventId" />
     <input type="hidden" asp-for="@Model.Event.EventActions.RegistrationEventId" value="@Model.Event.EventActions.RegistrationEventId" />
-    <input type="hidden" asp-for="@Model.Event.EventActions.ResultsId" value="@Model.Event.EventActions.ResultsId" />
+    <input type="hidden" asp-for="@Model.Event.EventActions.ResultsEventId" value="@Model.Event.EventActions.ResultsEventId" />
     <input type="hidden" name="Event.OptionalFields" value="@Model.Event.OptionalFields" />
     <button type="submit" class="btn btn-primary mx-auto">Изменить форму</button>
 </form>

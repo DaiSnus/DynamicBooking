@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DynamicBooking.Domain;
 using DynamicBooking.Doomain;
 using DynamicBooking.Infrastructure.Abstractions;
 using DynamicBooking.UseCases.GetEvent;
@@ -78,9 +79,15 @@ public class SignupCommandHandler : IRequestHandler<SignupCommand, IEnumerable<R
             }
         }
 
+        var registrationEventFieldValue = new RegistrationEventFieldValue
+        {
+            EventFieldValues = newEventFieldValue
+        };
+
         var selectedEventDatesIds = viewModel.SelectedEventDatesIds;
         if (selectedEventDatesIds != null && selectedEventDatesIds.Count() > 0)
         {
+            var participant = mapper.Map<User>(viewModel.Participant);
             var registrations = new List<Registration>();
             foreach (var selectedEventDateId in selectedEventDatesIds)
             {
@@ -90,10 +97,10 @@ public class SignupCommandHandler : IRequestHandler<SignupCommand, IEnumerable<R
                 {
                     var registration = new Registration
                     {
-                        Participant = mapper.Map<User>(viewModel.Participant),
+                        Participant = participant,
                         TimeSlot = timeSlot,
                         TimeSlotId = timeSlot.Id,
-                        EventFieldValues = newEventFieldValue,
+                        RegistrationEventFieldValue = registrationEventFieldValue
                     };
 
                     var doomainTimeSlot = await appDbContext.TimeSlots.FirstAsync(ts => ts.EventDateId == selectedEventDateId);
@@ -125,9 +132,11 @@ public class SignupCommandHandler : IRequestHandler<SignupCommand, IEnumerable<R
 
             if (registrations.Count > 0)
             {
+                await appDbContext.Users.AddAsync(participant);
+
                 await appDbContext.Registrations.AddRangeAsync(registrations);
             }
-        }
+        }        
 
         await appDbContext.EventFieldValues.AddRangeAsync(newEventFieldValue);
 

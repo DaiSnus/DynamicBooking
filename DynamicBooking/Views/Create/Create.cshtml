@@ -14,7 +14,7 @@
     <div class="event">
         <label>Добавьте информацию о мероприятии</label>
         <input type="text" asp-for="Event.Title" maxlength="100" placeholder="Название мероприятия" required />
-        <input type="text" asp-for="Event.Description" placeholder="Описание(до 500 символов)" maxlength="500" required />
+        <textarea asp-for="Event.Description" placeholder="Описание(до 500 символов)" maxlength="500" required></textarea>
         <div id="file-loader">
             <h3>Добавление файлов мероприятия (до 100 мб)</h3>
             <div id="file-holder">

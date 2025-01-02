@@ -1,4 +1,6 @@
-﻿namespace DynamicBooking.Doomain;
+﻿using DynamicBooking.Domain;
+
+namespace DynamicBooking.Doomain;
 
 public class EventFieldValue
 {
@@ -7,6 +9,10 @@ public class EventFieldValue
     public Guid EventFieldId { get; set; }
 
     public EventField EventField { get; set; }
+
+    public Guid RegistrationEventFieldValueId { get; set; }
+
+    public RegistrationEventFieldValue RegistrationEventFieldValue { get; set; }
 
     public string Value { get; set; }
 }

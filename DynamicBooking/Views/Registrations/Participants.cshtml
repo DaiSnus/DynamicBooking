@@ -1,0 +1,61 @@
+﻿@model ParticipantsViewModel
+
+
+<div class="participants">
+    <h2>Участники</h2>
+    <table class="participants-table table table-bordered border-primary">
+        <thead>
+            <tr>
+                <th rowspan="2" scope="col">#</th>
+                <th rowspan="2" scope="col">Имя</th>
+                <th rowspan="2" scope="col">Фамилия</th>
+                <th rowspan="2" scope="col">Отчество</th>
+                <th rowspan="2" scope="col">Номер телефона</th>
+                <th rowspan="2" scope="col">Почта</th>
+                @if (Model.Participants.Registrations != null && Model.Participants.Registrations.Count() > 0) {
+                    <th colspan="@(Model.Participants.Registrations.ToList().Last().RegistrationEventFieldValue.EventFieldValues.Count() == 0 ? 1 : Model.Participants.Registrations.ToList().Last().RegistrationEventFieldValue.EventFieldValues.Count())" scope="col">Дополнительные поля</th>
+                }
+                else{
+                    <th colspan="1" scope="col">Дополнительные поля</th>
+                }
+            </tr>
+            <tr>
+                @if (Model.Participants.Registrations != null && Model.Participants.Registrations.Count() > 0)
+                {
+                    @foreach (var eventFieldValue in Model.Participants.Registrations.ToList().Last().RegistrationEventFieldValue.EventFieldValues.OrderBy(efv => efv.EventField.Type))
+                    {
+                        <td class="first" scope="col" style="font-weight: bold;">@eventFieldValue.EventField.Title</td>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Participants.Registrations != null && Model.Participants.Registrations.Count() > 0)
+            {
+                var registrations = Model.Participants.Registrations.ToList();
+                @for (int i = 0; i < registrations.Count(); i++)
+                {
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@registrations[i].Participant.Name</td>
+                        <td>@registrations[i].Participant.Surname</td>
+                        <td>@registrations[i].Participant.Patronymic</td>
+                        <td>@registrations[i].Participant.PhoneNumber</td>
+                        <td>@registrations[i].Participant.Email</td>
+                        @foreach (var eventFieldValue in registrations[i].RegistrationEventFieldValue.EventFieldValues.OrderBy(efv => efv.EventField.Type))
+                        {
+                            if (eventFieldValue.EventField.Type == "file"){
+                                <td>
+                                    <a href="@eventFieldValue.Value" target="_blank" download="@eventFieldValue.Value">Файл</a>
+                                </td>
+                            }
+                            else{
+                                <td>@eventFieldValue.Value</td>
+                            }
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

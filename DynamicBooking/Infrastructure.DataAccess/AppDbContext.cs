@@ -27,6 +27,8 @@ public class AppDbContext : DbContext, IAppDbContext
 
     public DbSet<TimeRange> TimeRanges { get; private set; }
 
+    public DbSet<RegistrationEventFieldValue> RegistrationEventFieldValues { get; private set; }
+
     public AppDbContext(DbContextOptions options) : base(options)
     {
 
@@ -75,9 +77,15 @@ public class AppDbContext : DbContext, IAppDbContext
                 .WithMany(eventField => eventField.EventFieldValues)
                 .HasForeignKey(eventFieldValue => eventFieldValue.EventFieldId);
 
-        modelBuilder.Entity<Registration>()
+        modelBuilder.Entity<RegistrationEventFieldValue>()
                 .HasMany(r => r.EventFieldValues)
-                .WithOne();
+                .WithOne(efv => efv.RegistrationEventFieldValue)
+                .HasForeignKey(efv => efv.RegistrationEventFieldValueId);
+
+        modelBuilder.Entity<RegistrationEventFieldValue>()
+                .HasMany(refv => refv.Registrations)
+                .WithOne(r => r.RegistrationEventFieldValue)
+                .HasForeignKey(r => r.RegistrationEventFieldValueId);
 
         modelBuilder.Entity<Registration>()
                 .HasOne(r => r.TimeSlot)

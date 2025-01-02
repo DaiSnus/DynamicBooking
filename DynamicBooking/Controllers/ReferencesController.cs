@@ -18,10 +18,7 @@ public class ReferencesController : Controller
     [HttpGet("references")]
     public IActionResult References(EventActionsIdDto eventActions)
     {
-        var viewModel = new ReferencesViewModel
-        {
-            EventActions = eventActions
-        };
+        var viewModel = new ReferencesViewModel { EventActions = eventActions };
 
         return View(viewModel);
     }

@@ -1,4 +1,6 @@
-﻿namespace DynamicBooking.Doomain;
+﻿using DynamicBooking.Domain;
+
+namespace DynamicBooking.Doomain;
 
 public class Registration
 {
@@ -8,7 +10,9 @@ public class Registration
 
     public Guid TimeSlotId {  get; set; }
 
-    public IEnumerable<EventFieldValue> EventFieldValues { get; set; }
+    public Guid RegistrationEventFieldValueId { get; set; }
+
+    public RegistrationEventFieldValue RegistrationEventFieldValue { get; set; }
 
     public Guid ParticipantId { get; set; }
 
