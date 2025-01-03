@@ -1,0 +1,52 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/DynamicBooking/Files/ParticipantFiles/Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Files\ParticipantFiles\Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-D/RvHiVhVOzYJERIQL9dfSY14HNu0WQVD//HOMJaRC0="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"6564"},{"Name":"Content-Type","Value":"application/octet-stream"},{"Name":"ETag","Value":"\u0022D/RvHiVhVOzYJERIQL9dfSY14HNu0WQVD//HOMJaRC0=\u0022"},{"Name":"Last-Modified","Value":"Thu, 02 Jan 2025 15:50:04 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/DynamicBooking/Files/ParticipantFiles/Edit.tplk9ahxev.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Files\ParticipantFiles\Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"tplk9ahxev"},{"Name":"integrity","Value":"sha256-D/RvHiVhVOzYJERIQL9dfSY14HNu0WQVD//HOMJaRC0="},{"Name":"label","Value":"_content/DynamicBooking/Files/ParticipantFiles/Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"6564"},{"Name":"Content-Type","Value":"application/octet-stream"},{"Name":"ETag","Value":"\u0022D/RvHiVhVOzYJERIQL9dfSY14HNu0WQVD//HOMJaRC0=\u0022"},{"Name":"Last-Modified","Value":"Thu, 02 Jan 2025 15:50:04 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/DynamicBooking/js/Create.j7fu1ncnou.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\Create.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"j7fu1ncnou"},{"Name":"integrity","Value":"sha256-f4XgIgIheQBoQvLKW/6ex\u002BDEdi/qFswf0MzfWkYBpnU="},{"Name":"label","Value":"_content/DynamicBooking/js/Create.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"8852"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022f4XgIgIheQBoQvLKW/6ex\u002BDEdi/qFswf0MzfWkYBpnU=\u0022"},{"Name":"Last-Modified","Value":"Sun, 22 Dec 2024 14:39:05 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/DynamicBooking/js/Create.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\Create.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-f4XgIgIheQBoQvLKW/6ex\u002BDEdi/qFswf0MzfWkYBpnU="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"8852"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022f4XgIgIheQBoQvLKW/6ex\u002BDEdi/qFswf0MzfWkYBpnU=\u0022"},{"Name":"Last-Modified","Value":"Sun, 22 Dec 2024 14:39:05 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/DynamicBooking/js/Edit.chrumg7p9w.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\Edit.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"chrumg7p9w"},{"Name":"integrity","Value":"sha256-YFPVeICR5d3CG77WAW7v2Rc8ynM/rFaG3MzLT0\u002BuQWY="},{"Name":"label","Value":"_content/DynamicBooking/js/Edit.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"15531"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022YFPVeICR5d3CG77WAW7v2Rc8ynM/rFaG3MzLT0\u002BuQWY=\u0022"},{"Name":"Last-Modified","Value":"Fri, 27 Dec 2024 05:41:19 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/DynamicBooking/js/Edit.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\Edit.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-YFPVeICR5d3CG77WAW7v2Rc8ynM/rFaG3MzLT0\u002BuQWY="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"15531"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022YFPVeICR5d3CG77WAW7v2Rc8ynM/rFaG3MzLT0\u002BuQWY=\u0022"},{"Name":"Last-Modified","Value":"Fri, 27 Dec 2024 05:41:19 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/DynamicBooking/js/Signup.cm1c436vk1.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\Signup.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"cm1c436vk1"},{"Name":"integrity","Value":"sha256-zNy03yz7iIbT6xHJEbAfDRWAaPxjd9t6LKLSkphi44c="},{"Name":"label","Value":"_content/DynamicBooking/js/Signup.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2374"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022zNy03yz7iIbT6xHJEbAfDRWAaPxjd9t6LKLSkphi44c=\u0022"},{"Name":"Last-Modified","Value":"Fri, 27 Dec 2024 09:20:04 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/DynamicBooking/js/Signup.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\Signup.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-zNy03yz7iIbT6xHJEbAfDRWAaPxjd9t6LKLSkphi44c="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2374"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022zNy03yz7iIbT6xHJEbAfDRWAaPxjd9t6LKLSkphi44c=\u0022"},{"Name":"Last-Modified","Value":"Fri, 27 Dec 2024 09:20:04 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+  </ItemGroup>
+</Project>

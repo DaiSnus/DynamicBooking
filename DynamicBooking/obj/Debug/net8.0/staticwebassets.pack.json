@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\Files\\ParticipantFiles\\Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2",
+      "PackagePath": "staticwebassets\\Files\\ParticipantFiles\\Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2"
+    },
+    {
+      "Id": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\js\\Create.js",
+      "PackagePath": "staticwebassets\\js\\Create.js"
+    },
+    {
+      "Id": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\js\\Edit.js",
+      "PackagePath": "staticwebassets\\js\\Edit.js"
+    },
+    {
+      "Id": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\js\\Signup.js",
+      "PackagePath": "staticwebassets\\js\\Signup.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DynamicBooking.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DynamicBooking.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.DynamicBooking.props",
+      "PackagePath": "build\\DynamicBooking.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.DynamicBooking.props",
+      "PackagePath": "buildMultiTargeting\\DynamicBooking.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.DynamicBooking.props",
+      "PackagePath": "buildTransitive\\DynamicBooking.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

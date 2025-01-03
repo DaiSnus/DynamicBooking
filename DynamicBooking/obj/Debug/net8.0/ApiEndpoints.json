@@ -1,0 +1,456 @@
+[
+  {
+    "ContainingType": "DynamicBooking.Controllers.CreateController",
+    "Method": "Create",
+    "RelativePath": "create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Event.Owner.Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Owner.Surname",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Owner.Patronymic",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Owner.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Owner.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.EventActions.RegistrationEventId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.EventActions.ResultsEventId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.EventActions.EditEventId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.FormFiles",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventFileDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.EventDates",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventDateDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.OptionalFields",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventFieldDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "EventDates",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventDateDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "EventFiles",
+        "Type": "Microsoft.AspNetCore.Http.IFormFileCollection",
+        "IsRequired": false
+      },
+      {
+        "Name": "OptionalFields",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventFieldDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DynamicBooking.Controllers.CreateController",
+    "Method": "Create",
+    "RelativePath": "create",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DynamicBooking.Controllers.EditController",
+    "Method": "Edit",
+    "RelativePath": "edit/{EditEventId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EditEventId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DynamicBooking.Controllers.EditController",
+    "Method": "Edit",
+    "RelativePath": "edit/{EditEventID}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Event.Owner.Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Owner.Surname",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Owner.Patronymic",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Owner.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Owner.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.EventActions.RegistrationEventId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.EventActions.ResultsEventId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.EventActions.EditEventId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.FormFiles",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventFileDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.EventDates",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventDateDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.OptionalFields",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventFieldDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "AddedEventDates",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventDateDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "NewEventDates",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventDateDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DeletedEventDates",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventDateDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "AddedEventFiles",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventFileDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "NewEventFiles",
+        "Type": "Microsoft.AspNetCore.Http.IFormFileCollection",
+        "IsRequired": false
+      },
+      {
+        "Name": "DeletedEventFiles",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventFileDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "AddedOptionalFields",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventFieldDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "NewOptionalFields",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventFieldDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DeletedOptionalFields",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventFieldDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "EditEventID",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DynamicBooking.Controllers.ReferencesController",
+    "Method": "References",
+    "RelativePath": "references",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RegistrationEventId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "ResultsEventId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "EditEventId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DynamicBooking.Controllers.RegistrationsController",
+    "Method": "Participants",
+    "RelativePath": "registrations/{EventDateId}/participants",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventDateId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DynamicBooking.Controllers.RegistrationsController",
+    "Method": "Registrations",
+    "RelativePath": "registrations/{ResultsEventId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resultsEventId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DynamicBooking.Controllers.SignupController",
+    "Method": "Signup",
+    "RelativePath": "signup/{RegistrationEventId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registrationEventId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DynamicBooking.Controllers.SignupController",
+    "Method": "Signup",
+    "RelativePath": "signup/{RegistrationEventId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Event.Owner.Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Owner.Surname",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Owner.Patronymic",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Owner.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Owner.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.EventActions.RegistrationEventId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.EventActions.ResultsEventId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.EventActions.EditEventId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.FormFiles",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventFileDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.EventDates",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventDateDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Event.OptionalFields",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventFieldDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Participant.Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Participant.Surname",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Participant.Patronymic",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Participant.PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Participant.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SelectedEventDatesIds",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "ParticipantFiles",
+        "Type": "Microsoft.AspNetCore.Http.IFormFileCollection",
+        "IsRequired": false
+      },
+      {
+        "Name": "EventFieldsValue",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DynamicBooking.UseCases.GetEvent.EventFieldValueDto, DynamicBooking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "RegistrationEventId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DynamicBooking.Controllers.SignupController",
+    "Method": "ResultRegistration",
+    "RelativePath": "signup/{RegistrationEventId}/result",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registrationEventId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
