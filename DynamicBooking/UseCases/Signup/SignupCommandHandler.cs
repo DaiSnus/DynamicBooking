@@ -41,7 +41,7 @@ public class SignupCommandHandler : IRequestHandler<SignupCommand, IEnumerable<R
                         .Include(e => e.EventDates)
                         .ThenInclude(ed => ed.TimeSlot)
                         .ThenInclude(ts => ts.TimeRange)
-                        .FirstAsync(e => e.EventActions.RegistrationEventId == eventDto.EventActions.RegistrationEventId);
+                        .FirstAsync(e => e.EventActions.RegistrationEventId == eventDto.EventActions.RegistrationEventId, cancellationToken);
 
         var newEventFieldValue = new List<EventFieldValue>();
 
@@ -103,7 +103,7 @@ public class SignupCommandHandler : IRequestHandler<SignupCommand, IEnumerable<R
                         RegistrationEventFieldValue = registrationEventFieldValue
                     };
 
-                    var doomainTimeSlot = await appDbContext.TimeSlots.FirstAsync(ts => ts.EventDateId == selectedEventDateId);
+                    var doomainTimeSlot = await appDbContext.TimeSlots.FirstAsync(ts => ts.EventDateId == selectedEventDateId, cancellationToken);
                     doomainTimeSlot.AvailableSeats--;
 
                     registrationSuccesses.Add(new RegistrationSuccessDto
@@ -132,15 +132,15 @@ public class SignupCommandHandler : IRequestHandler<SignupCommand, IEnumerable<R
 
             if (registrations.Count > 0)
             {
-                await appDbContext.Users.AddAsync(participant);
+                await appDbContext.Users.AddAsync(participant, cancellationToken);
 
-                await appDbContext.Registrations.AddRangeAsync(registrations);
+                await appDbContext.Registrations.AddRangeAsync(registrations, cancellationToken);
             }
         }        
 
-        await appDbContext.EventFieldValues.AddRangeAsync(newEventFieldValue);
+        await appDbContext.EventFieldValues.AddRangeAsync(newEventFieldValue, cancellationToken);
 
-        await appDbContext.SaveChangesAsync();
+        await appDbContext.SaveChangesAsync(cancellationToken);
 
         return registrationSuccesses;
     }

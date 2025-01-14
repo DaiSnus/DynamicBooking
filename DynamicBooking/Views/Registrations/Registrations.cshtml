@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var eventDate in Model.EventInfoAndDates.EventDates)
+            @foreach (var eventDate in Model.EventInfoAndDates.EventDates.OrderBy(ed => ed.Date).ThenBy(ed => ed.TimeSlot.TimeRange))
             {
                 <tr>
                     <td>@eventDate.Date</td>

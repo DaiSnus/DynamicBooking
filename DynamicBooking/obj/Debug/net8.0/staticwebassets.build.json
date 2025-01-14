@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xRx1M+tY6sm2nkfnGb+tN/N3lM4aEaHhR8TZAarVVpA=",
+  "Hash": "na+qFfDRKYKoNS0W0NhJM/tMjtedzMxh8kD8EOkR+1I=",
   "Source": "DynamicBooking",
   "BasePath": "_content/DynamicBooking",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\Files\\ParticipantFiles\\Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2",
+      "Identity": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\Files\\OwnerFiles\\2024-12-15_23-26-27.png94e86027-ed54-43c5-a5b5-3978116fc0fc",
       "SourceId": "DynamicBooking",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\",
       "BasePath": "_content/DynamicBooking",
-      "RelativePath": "Files/ParticipantFiles/Edit#[.{fingerprint}]?.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2",
+      "RelativePath": "Files/OwnerFiles/2024-12-15_23-26-27#[.{fingerprint}]?.png94e86027-ed54-43c5-a5b5-3978116fc0fc",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,11 +31,32 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "tplk9ahxev",
-      "Integrity": "D/RvHiVhVOzYJERIQL9dfSY14HNu0WQVD//HOMJaRC0=",
+      "Fingerprint": "bsd3ym1mbv",
+      "Integrity": "dY2sqBSPtADD6z2rQfQKcFmxiksPRrU09DVDsbWpW/I=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Files\\ParticipantFiles\\Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2"
+      "OriginalItemSpec": "wwwroot\\Files\\OwnerFiles\\2024-12-15_23-26-27.png94e86027-ed54-43c5-a5b5-3978116fc0fc"
+    },
+    {
+      "Identity": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\Files\\ParticipantFiles\\logo.webp47eebb23-7fe3-4eb0-9112-f7b0cd60663d",
+      "SourceId": "DynamicBooking",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\",
+      "BasePath": "_content/DynamicBooking",
+      "RelativePath": "Files/ParticipantFiles/logo#[.{fingerprint}]?.webp47eebb23-7fe3-4eb0-9112-f7b0cd60663d",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fs1koctjgu",
+      "Integrity": "D54AAFxHQiVobEcRZXOCH1VuNVk4h6M2ia0wPhvoHJ4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Files\\ParticipantFiles\\logo.webp47eebb23-7fe3-4eb0-9112-f7b0cd60663d"
     },
     {
       "Identity": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\js\\Create.js",
@@ -103,8 +124,8 @@
   ],
   "Endpoints": [
     {
-      "Route": "Files/ParticipantFiles/Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2",
-      "AssetFile": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\Files\\ParticipantFiles\\Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2",
+      "Route": "Files/OwnerFiles/2024-12-15_23-26-27.bsd3ym1mbv.png94e86027-ed54-43c5-a5b5-3978116fc0fc",
+      "AssetFile": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\Files\\OwnerFiles\\2024-12-15_23-26-27.png94e86027-ed54-43c5-a5b5-3978116fc0fc",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -113,7 +134,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6564"
+          "Value": "71165"
         },
         {
           "Name": "Content-Type",
@@ -121,48 +142,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"D/RvHiVhVOzYJERIQL9dfSY14HNu0WQVD//HOMJaRC0=\""
+          "Value": "\"dY2sqBSPtADD6z2rQfQKcFmxiksPRrU09DVDsbWpW/I=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 02 Jan 2025 15:50:04 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-D/RvHiVhVOzYJERIQL9dfSY14HNu0WQVD//HOMJaRC0="
-        }
-      ]
-    },
-    {
-      "Route": "Files/ParticipantFiles/Edit.tplk9ahxev.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2",
-      "AssetFile": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\Files\\ParticipantFiles\\Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "6564"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"D/RvHiVhVOzYJERIQL9dfSY14HNu0WQVD//HOMJaRC0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 02 Jan 2025 15:50:04 GMT"
+          "Value": "Tue, 14 Jan 2025 09:36:48 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -172,15 +156,134 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "tplk9ahxev"
+          "Value": "bsd3ym1mbv"
         },
         {
           "Name": "label",
-          "Value": "Files/ParticipantFiles/Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2"
+          "Value": "Files/OwnerFiles/2024-12-15_23-26-27.png94e86027-ed54-43c5-a5b5-3978116fc0fc"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-D/RvHiVhVOzYJERIQL9dfSY14HNu0WQVD//HOMJaRC0="
+          "Value": "sha256-dY2sqBSPtADD6z2rQfQKcFmxiksPRrU09DVDsbWpW/I="
+        }
+      ]
+    },
+    {
+      "Route": "Files/OwnerFiles/2024-12-15_23-26-27.png94e86027-ed54-43c5-a5b5-3978116fc0fc",
+      "AssetFile": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\Files\\OwnerFiles\\2024-12-15_23-26-27.png94e86027-ed54-43c5-a5b5-3978116fc0fc",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "71165"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dY2sqBSPtADD6z2rQfQKcFmxiksPRrU09DVDsbWpW/I=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 14 Jan 2025 09:36:48 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dY2sqBSPtADD6z2rQfQKcFmxiksPRrU09DVDsbWpW/I="
+        }
+      ]
+    },
+    {
+      "Route": "Files/ParticipantFiles/logo.fs1koctjgu.webp47eebb23-7fe3-4eb0-9112-f7b0cd60663d",
+      "AssetFile": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\Files\\ParticipantFiles\\logo.webp47eebb23-7fe3-4eb0-9112-f7b0cd60663d",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "331136"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D54AAFxHQiVobEcRZXOCH1VuNVk4h6M2ia0wPhvoHJ4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 14 Jan 2025 09:36:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fs1koctjgu"
+        },
+        {
+          "Name": "label",
+          "Value": "Files/ParticipantFiles/logo.webp47eebb23-7fe3-4eb0-9112-f7b0cd60663d"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-D54AAFxHQiVobEcRZXOCH1VuNVk4h6M2ia0wPhvoHJ4="
+        }
+      ]
+    },
+    {
+      "Route": "Files/ParticipantFiles/logo.webp47eebb23-7fe3-4eb0-9112-f7b0cd60663d",
+      "AssetFile": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\Files\\ParticipantFiles\\logo.webp47eebb23-7fe3-4eb0-9112-f7b0cd60663d",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "331136"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D54AAFxHQiVobEcRZXOCH1VuNVk4h6M2ia0wPhvoHJ4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 14 Jan 2025 09:36:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-D54AAFxHQiVobEcRZXOCH1VuNVk4h6M2ia0wPhvoHJ4="
         }
       ]
     },

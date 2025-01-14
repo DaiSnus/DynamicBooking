@@ -41,7 +41,6 @@ public class EditFormCommandHandler : IRequestHandler<EditFormCommand, EventActi
                         .ThenInclude(ts => ts.TimeRange)
                         .Include(e => e.FormFiles)
                         .Include(e => e.OptionalFields)
-                        .ThenInclude(of => of.EventFieldValues)
                         .FirstAsync(ea => ea.EventActions.EditEventId == eventDto.EventActions.EditEventId, cancellationToken);
 
         if (viewModel.NewEventFiles != null && viewModel.NewEventFiles.Count > 0)
@@ -56,7 +55,7 @@ public class EditFormCommandHandler : IRequestHandler<EditFormCommand, EventActi
                 eventFile.Event = e;
                 mappingEventFiles.Add(eventFile);
             }
-            await appDbContext.EventsFiles.AddRangeAsync(mappingEventFiles);
+            await appDbContext.EventsFiles.AddRangeAsync(mappingEventFiles, cancellationToken);
         }
 
         var uploadedEventFiles = appDbContext.EventsFiles;
@@ -113,7 +112,7 @@ public class EditFormCommandHandler : IRequestHandler<EditFormCommand, EventActi
                 eventDate.Event = e;
                 mappingEventDates.Add(eventDate);
             }
-            await appDbContext.EventsDate.AddRangeAsync(mappingEventDates);
+            await appDbContext.EventsDate.AddRangeAsync(mappingEventDates, cancellationToken);
         }
 
         var uploadedOptionalFields = appDbContext.EventsFields;
@@ -155,13 +154,15 @@ public class EditFormCommandHandler : IRequestHandler<EditFormCommand, EventActi
                 eventField.Event = e;
                 mappingOptionalFields.Add(eventField);
             }
-            await appDbContext.EventsFields.AddRangeAsync(mappingOptionalFields);
+            await appDbContext.EventsFields.AddRangeAsync(mappingOptionalFields, cancellationToken);
         }
         
         e.Owner.Surname = eventDto.Owner.Surname;
         e.Owner.Name = eventDto.Owner.Name;
         e.Owner.Email = eventDto.Owner.Email;
         e.Owner.PhoneNumber = eventDto.Owner.PhoneNumber;
+        e.Description = eventDto.Description;
+        e.Title = eventDto.Title;
 
         await appDbContext.SaveChangesAsync(cancellationToken);
 

@@ -1,8 +1,12 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\Files\\ParticipantFiles\\Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2",
-      "PackagePath": "staticwebassets\\Files\\ParticipantFiles\\Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2"
+      "Id": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\Files\\OwnerFiles\\2024-12-15_23-26-27.png94e86027-ed54-43c5-a5b5-3978116fc0fc",
+      "PackagePath": "staticwebassets\\Files\\OwnerFiles\\2024-12-15_23-26-27.png94e86027-ed54-43c5-a5b5-3978116fc0fc"
+    },
+    {
+      "Id": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\Files\\ParticipantFiles\\logo.webp47eebb23-7fe3-4eb0-9112-f7b0cd60663d",
+      "PackagePath": "staticwebassets\\Files\\ParticipantFiles\\logo.webp47eebb23-7fe3-4eb0-9112-f7b0cd60663d"
     },
     {
       "Id": "C:\\Users\\DaiSnus\\Desktop\\DynamicBooking\\DynamicBooking\\DynamicBooking\\wwwroot\\js\\Create.js",

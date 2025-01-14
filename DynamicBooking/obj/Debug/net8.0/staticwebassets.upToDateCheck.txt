@@ -1,4 +1,5 @@
-wwwroot\Files\ParticipantFiles\Edit.cshtml6dc66d6a-f6af-49dd-975b-b2569269d9d2
+wwwroot\Files\OwnerFiles\2024-12-15_23-26-27.png94e86027-ed54-43c5-a5b5-3978116fc0fc
+wwwroot\Files\ParticipantFiles\logo.webp47eebb23-7fe3-4eb0-9112-f7b0cd60663d
 wwwroot\js\Create.js
 wwwroot\js\Edit.js
 wwwroot\js\Signup.js
